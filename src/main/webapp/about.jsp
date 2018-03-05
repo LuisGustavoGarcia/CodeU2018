@@ -64,6 +64,19 @@
         This page should also be used to describe the features and improvements
         you've added.
       </p>
+      
+      <h2>Team 15 Members</h2>
+      <ul>
+      	<li><strong>Tony Carnevale - PA</strong><!-- add your bio here! --></li>
+      	<li><strong>Luis Garcia</strong><!-- add your bio here! --></li>
+      	<li><strong>Erica Kok</strong><!-- add your bio here! --></li>
+      	<li><strong>Jean Leong</strong><!-- add your bio here! --></li>
+      	<li><strong>Lina Sim</strong>: Hello! I'm currently a sophomore studying 
+      	CS at Brown, with an interest in front-end development 
+      	and education in CS. Fun facts: I grew up on a tiny island in Malaysia, 
+      	I like making cool things, eating yummy food and taking long train rides.
+      	&#128646;</li>
+      </ul>
     </div>
   </div>
 </body>
