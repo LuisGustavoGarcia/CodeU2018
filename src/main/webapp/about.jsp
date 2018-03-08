@@ -44,7 +44,12 @@
         and entrepreneurship. I lived in Cuba until I was 7 years old, and later grew up in Miami, FL.
         </li>
       	<li><strong>Erica Kok</strong><!-- add your bio here! --></li>
-      	<li><strong>Jean Leong</strong><!-- add your bio here! --></li>
+      	<li><strong>Jean Leong</strong>Hihi! I'm a sophomore Computer Science & Engineering 
+      	major at Bucknell (we just won our championship game!! March madness, here we come!), 
+      	aspiring also to minor in Math and Spanish. I am from Westchester, New York (about 1 
+      	hour north of NYC) and grew up in Malaysia until I was in fifth grade before moving 
+      	to New York. 
+      	<!-- add your bio here! --></li> 
       	<li><strong>Lina Sim</strong>: Hello! I'm currently a sophomore studying
       	CS at Brown, with an interest in front-end development
       	and education in CS. Fun facts: I grew up on a tiny island in Malaysia,
