@@ -43,7 +43,7 @@
         at the University of Florida. I'm interested in full-stack Web Development, graphic design,
         and entrepreneurship. I lived in Cuba until I was 7 years old, and later grew up in Miami, FL.
         </li>
-      	<li><strong>Erica Kok</strong>Hi! I'm currently a junior majoring in Computer Science and
+      	<li><strong>Erica Kok</strong>: Hi! I'm currently a junior majoring in Computer Science and
 	minoring in Math at Stetson University in Florida. I'm currently doing research in Artificial
 	Intelligence as well, which is where my interest within the tech industry lies. A few facts about
 	me: I grew up in the Philippines before moving to the US just four years ago, I love traveling,
