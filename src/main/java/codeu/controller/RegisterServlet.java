@@ -17,4 +17,5 @@ public class RegisterServlet extends HttpServlet {
 
    request.getRequestDispatcher("/WEB-INF/view/register.jsp").forward(request, response);
  }
+  
 }
