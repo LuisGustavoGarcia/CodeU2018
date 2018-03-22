@@ -39,16 +39,17 @@ public class PersistentDataStoreTest {
   @Test
   public void testSaveAndLoadUsers() throws PersistentDataStoreException {
     UUID idOne = UUID.randomUUID();
-    String nameOne = "test_username_one";
-    String passwordOne = "test_password_one";
+
+    String nameOne = "test_username_one"; 
+    String password1 = "test_pw_one"; 			//Jean added tests for password (part 2) 
     Instant creationOne = Instant.ofEpochMilli(1000);
-    User inputUserOne = new User(idOne, nameOne, passwordOne, creationOne);
+    User inputUserOne = new User(idOne, nameOne, password1, creationOne);
 
     UUID idTwo = UUID.randomUUID();
     String nameTwo = "test_username_two";
-    String passwordTwo = "test_password_two";
+    String password2 = "test_pw_two"; 
     Instant creationTwo = Instant.ofEpochMilli(2000);
-    User inputUserTwo = new User(idTwo, nameTwo, passwordTwo, creationTwo);
+    User inputUserTwo = new User(idTwo, nameTwo, password2, creationTwo);
 
     // save
     persistentDataStore.writeThrough(inputUserOne);
@@ -139,9 +140,10 @@ public class PersistentDataStoreTest {
 
     Message resultMessageTwo = resultMessages.get(1);
     Assert.assertEquals(idTwo, resultMessageTwo.getId());
-    Assert.assertEquals(conversationTwo, resultMessageTwo.getConversationId());
+    Assert.assertEquals(conversationTwo, resultMessageTwo.getConversationId()); 
     Assert.assertEquals(authorTwo, resultMessageTwo.getAuthorId());
     Assert.assertEquals(contentTwo, resultMessageTwo.getContent());
     Assert.assertEquals(creationTwo, resultMessageTwo.getCreationTime());
-  }
+  } 
+  
 }

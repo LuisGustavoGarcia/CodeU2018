@@ -55,6 +55,7 @@ public class LoginServletTest {
   @Test
   public void testDoPost_BadUsername() throws IOException, ServletException {
     Mockito.when(mockRequest.getParameter("username")).thenReturn("bad !@#$% username");
+    Mockito.when(mockRequest.getParameter("password")).thenReturn("password"); 
 
     loginServlet.doPost(mockRequest, mockResponse);
 
