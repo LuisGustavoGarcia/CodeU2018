@@ -66,6 +66,7 @@ public class LoginServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
     String username = request.getParameter("username");
+    String password = request.getParameter("password"); 
 
     if (!username.matches("[\\w*\\s*]*")) {
       request.setAttribute("error", "Please enter only letters, numbers, and spaces.");
@@ -74,8 +75,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     if (!userStore.isUserRegistered(username)) {
-      // TODO: add password
-      User user = new User(UUID.randomUUID(), username, null, Instant.now());
+      User user = new User(UUID.randomUUID(), username, password, Instant.now());
       userStore.addUser(user);
     }
 
