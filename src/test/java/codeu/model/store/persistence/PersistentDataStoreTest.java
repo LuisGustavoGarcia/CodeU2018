@@ -39,6 +39,7 @@ public class PersistentDataStoreTest {
   @Test
   public void testSaveAndLoadUsers() throws PersistentDataStoreException {
     UUID idOne = UUID.randomUUID();
+
     String nameOne = "test_username_one"; 
     String password1 = "test_pw_one"; 			//Jean added tests for password (part 2) 
     Instant creationOne = Instant.ofEpochMilli(1000);
