@@ -63,7 +63,27 @@ public class LoginServlet extends HttpServlet {
   * the submitted form data, checks that they're valid, and either adds the user to the session
   * so we know the user is logged in or shows an error to the user.
   */
-  
+  // @Override
+  // public void doPost(HttpServletRequest request, HttpServletResponse response)
+  //     throws IOException, ServletException {
+  //   String username = request.getParameter("username");
+  //
+  //   if (!username.matches("[\\w*\\s*]*")) {
+  //     request.setAttribute("error", "Please enter only letters, numbers, and spaces.");
+  //     request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
+  //     return;
+  //   }
+  //
+  //   if (!userStore.isUserRegistered(username)) {
+  //     // TODO: add password
+  //     User user = new User(UUID.randomUUID(), username, null, Instant.now());
+  //     userStore.addUser(user);
+  //   }
+  //
+  //   request.getSession().setAttribute("user", username);
+  //   response.sendRedirect("/conversations");
+  // }
+
   @Override
  public void doPost(HttpServletRequest request, HttpServletResponse response)
      throws IOException, ServletException {
