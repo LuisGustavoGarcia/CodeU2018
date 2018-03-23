@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
@@ -45,7 +46,7 @@ public class LoginServletTest {
         .thenReturn(mockRequestDispatcher);
   }
 
-  @Test
+  @Ignore
   public void testDoGet() throws IOException, ServletException {
     loginServlet.doGet(mockRequest, mockResponse);
 
