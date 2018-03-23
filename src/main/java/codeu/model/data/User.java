@@ -53,6 +53,11 @@ public class User {
 	    return password;
 	  }
 
+  /** Returns the password of this User. */
+  public String getPassword() {
+   return password;
+ }
+
   /** Returns the creation time of this User. */
   public Instant getCreationTime() {
     return creation;
