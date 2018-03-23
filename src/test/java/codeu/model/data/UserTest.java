@@ -25,6 +25,7 @@ public class UserTest {
   public void testCreate() {
     UUID id = UUID.randomUUID();
     String name = "test_username";
+    String password = "test_password"; 
     Instant creation = Instant.now();
     String password = "password";
 
