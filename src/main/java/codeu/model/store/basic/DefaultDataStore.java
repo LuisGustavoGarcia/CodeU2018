@@ -94,8 +94,6 @@ public class DefaultDataStore {
     return messages;
   }
 
-
-  //I may have broken this method's code. - Luis
   private void addRandomUsers() {
 
     List<String> randomUsernames = getRandomUsernames();
