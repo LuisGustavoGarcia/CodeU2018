@@ -21,18 +21,21 @@ import java.util.UUID;
 public class User {
   private final UUID id;
   private final String name;
-  private final Instant creation;
+  private final String hashedPassword; 	// Jean added this for part 2; Luis renamed this variable for part 9
+  private final Instant creation; 
 
   /**
    * Constructs a new User.
    *
    * @param id the ID of this User
    * @param name the username of this User
+   * @param password
    * @param creation the creation time of this User
    */
-  public User(UUID id, String name, Instant creation) {
+  public User(UUID id, String name, String password, Instant creation) {
     this.id = id;
     this.name = name;
+    this.hashedPassword = password; 		//Jean added password to constructor; Luis renamed this variable for part 9
     this.creation = creation;
   }
 
@@ -45,6 +48,11 @@ public class User {
   public String getName() {
     return name;
   }
+
+  /** Returns the password of this User. */
+  public String getPassword() {
+   return hashedPassword;
+ }
 
   /** Returns the creation time of this User. */
   public Instant getCreationTime() {

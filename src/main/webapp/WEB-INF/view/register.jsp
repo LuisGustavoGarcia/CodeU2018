@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
- <title>Login</title>
+ <title>Register</title>
  <link rel="stylesheet" href="/css/main.css">
  <style>
    label {
@@ -20,24 +20,23 @@
    <% } else{ %>
      <a href="/login">Login</a>
    <% } %>
-   <a href="/about">About</a>
  </nav>
 
  <div id="container">
-   <h1>Login</h1>
+   <h1>Register</h1>
 
    <% if(request.getAttribute("error") != null){ %>
        <h2 style="color:red"><%= request.getAttribute("error") %></h2>
    <% } %>
 
-   <form action="/login" method="POST">
+   <form action="/register" method="POST">
      <label for="username">Username: </label>
      <input type="text" name="username" id="username">
      <br/>
      <label for="password">Password: </label>
      <input type="password" name="password" id="password">
      <br/><br/>
-     <button type="submit">Login</button>
+     <button type="submit">Submit</button>
    </form>
  </div>
 </body>
