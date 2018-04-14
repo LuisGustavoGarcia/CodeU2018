@@ -14,37 +14,21 @@
   limitations under the License.
 --%>
 <%@ page import="java.util.List" %>
-<%@ page import="codeu.model.data.Conversation" %>
 <%@ page import="codeu.model.data.Message" %>
+<%@ page import="codeu.model.data.User" %>
 <%@ page import="codeu.model.store.basic.UserStore" %>
 <%
-Conversation conversation = (Conversation) request.getAttribute("conversation");
 List<Message> messages = (List<Message>) request.getAttribute("messages");
+User user = (User) request.getAttribute("user");
+String sessionUser = (String) request.getSession().getAttribute("user");
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= conversation.getTitle() %></title>
-  <link rel="stylesheet" href="/css/main.css" type="text/css">
-
-  <style>
-    #chat {
-      background-color: white;
-      height: 500px;
-      overflow-y: scroll
-    }
-  </style>
-
-  <script>
-    // scroll the chat div to the bottom
-    function scrollChat() {
-      var chatDiv = document.getElementById('chat');
-      chatDiv.scrollTop = chatDiv.scrollHeight;
-    };
-  </script>
+  <title>Conversations</title>
+  <link rel="stylesheet" href="/css/main.css">
 </head>
-<body onload="scrollChat()">
+<body>
 
   <nav>
    <a id="navTitle" href="/">CodeU Chat App</a>
@@ -57,43 +41,39 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
    <% } %>
    <a href="/about.jsp">About</a>
  </nav>
-
+           
+           
   <div id="container">
 
-    <h1><%= conversation.getTitle() %>
-      <a href="" style="float: right">&#8635;</a></h1>
-
+    <h1><%= user.getName()%>'s Profile <a href="" style="float: right">&#8635;</a> </h1>
+        
+    <h2>About <%= user.getName()%></h2>
+    <p><%= user.getAboutMe()%></p>
+        
+    <% if (sessionUser != null && sessionUser.equals(user.getName())) { %>
+    <h3>Edit your profile!</h3>
+    <form action="/users/<%= user.getName() %>" method="POST">
+        <input id="profile" type="text" name="profile" value=<%= user.getAboutMe() %>>
+        <br/><br/>
+        <button type="submit">Update profile!</button>
+    </form>
+    <% } %>
+        
+    <h2><%= user.getName()%>'s Messages</h2>
     <hr/>
-
-    <div id="chat">
-      <ul>
+    <div id="messages">
+    <ul>
     <%
       for (Message message : messages) {
-        String author = UserStore.getInstance()
-          .getUser(message.getAuthorId()).getName();
     %>
-      <li><strong><a href="/users/<%= author %>"><%= author %></a>:</strong> <%= message.getContent() %></li>
+        <li><strong><%= message.getCreationTime() %>:</strong> <%= message.getContent() %></li>
     <%
       }
     %>
       </ul>
     </div>
-
-    <hr/>
-
-    <% if (request.getSession().getAttribute("user") != null) { %>
-    <form action="/chat/<%= conversation.getTitle() %>" method="POST">
-        <input type="text" name="message">
-        <br/>
-        <button type="submit">Send</button>
-    </form>
-    <% } else { %>
-      <p><a href="/login">Login</a> to send a message.</p>
-    <% } %>
-
-    <hr/>
+    </hr>
 
   </div>
-
 </body>
 </html>

@@ -57,7 +57,7 @@ public class PersistentDataStoreTest {
 
     // load
     List<User> resultUsers = persistentDataStore.loadUsers();
-
+   
     // confirm that what we saved matches what we loaded
     User resultUserOne = resultUsers.get(0);
     Assert.assertEquals(idOne, resultUserOne.getId());
