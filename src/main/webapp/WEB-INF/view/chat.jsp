@@ -27,6 +27,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
 <head>
   <title><%= conversation.getTitle() %></title>
   <link rel="stylesheet" href="/css/main.css" type="text/css">
+  <link rel="stylesheet" href="/css/chat.css" type="text/css">
 
   <style>
     #chat {
@@ -82,8 +83,13 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <hr/>
 
     <% if (request.getSession().getAttribute("user") != null) { %>
+    <button onmousedown="event.preventDefault();" onclick="command('bold')">Bold</button>
+    <button onmousedown="event.preventDefault();" onclick="command('italic')">Italics</button>
+    <button onmousedown="event.preventDefault();" onclick="command('underline')">Underline</button>
+    <button onmousedown="event.preventDefault();" onclick="command('superscript')">Superscript</button>
+
     <form action="/chat/<%= conversation.getTitle() %>" method="POST">
-        <input type="text" name="message">
+        <p class="editor" type="text" name="message">Test</p>
         <br/>
         <button type="submit">Send</button>
     </form>
@@ -94,6 +100,6 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <hr/>
 
   </div>
-
+  <script src="../../../js/main.js"></script>
 </body>
 </html>

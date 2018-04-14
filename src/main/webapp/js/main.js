@@ -1,5 +1,19 @@
-window.onload = function() {
-  console.log("hello");
+//Find the element in our HTML that we allow the user to edit
+const editor = document.querySelector('.editor');
+//Make this elemtent editable.
+editor.contentEditable = true;
+editor.focus();
+
+//This function is responsible for editing the text using a command passed to it
+//and the Browser execCommand functionality.
+function command(name){
+  console.log("Message: " + message);
+  try{
+    console.log("This ran:" + name);
+    var success = document.execCommand(name, false, null);
+  }catch(error){
+    alert(error);
+  }
 }
 
 function ShowResult()
