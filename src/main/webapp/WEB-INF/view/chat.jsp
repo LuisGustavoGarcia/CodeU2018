@@ -87,11 +87,11 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <button onmousedown="event.preventDefault();" onclick="command('italic')">Italics</button>
     <button onmousedown="event.preventDefault();" onclick="command('underline')">Underline</button>
     <button onmousedown="event.preventDefault();" onclick="command('superscript')">Superscript</button>
-
+    
     <form action="/chat/<%= conversation.getTitle() %>" method="POST">
-        <p class="editor" type="text" name="message">Test</p>
+        <p id="pInput" class="editor" type="text" name="message">Test</p>
         <br/>
-        <button type="submit">Send</button>
+        <button type="submit" onclick="setMessage()">Send</button>
     </form>
     <% } else { %>
       <p><a href="/login">Login</a> to send a message.</p>

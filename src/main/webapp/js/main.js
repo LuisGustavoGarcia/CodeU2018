@@ -7,19 +7,23 @@ editor.focus();
 //This function is responsible for editing the text using a command passed to it
 //and the Browser execCommand functionality.
 function command(name){
-  console.log("Message: " + message);
   try{
-    console.log("This ran:" + name);
     var success = document.execCommand(name, false, null);
   }catch(error){
     alert(error);
   }
 }
 
-function ShowResult()
-{
-    my_window = window.open("about:blank", "mywindow1");
-    //By the above line code we have opened a new window
-    my_window.document.write(x);
-    //Here we have added the value of the textarea to the new window
-}
+// function setMessage(){
+//   var elem = document.getElementById('pInput');
+//   var message1 = elem.text();
+//   print(message1);
+// }
+
+// function ShowResult()
+// {
+//     my_window = window.open("about:blank", "mywindow1");
+//     //By the above line code we have opened a new window
+//     my_window.document.write(x);
+//     //Here we have added the value of the textarea to the new window
+// }
