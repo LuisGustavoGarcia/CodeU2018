@@ -25,6 +25,7 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -77,7 +78,8 @@ public class PersistentDataStore {
         throw new PersistentDataStoreException(e);
       }
     }
-
+    
+    Collections.sort(users, (u1, u2) -> u1.getCreationTime().compareTo(u2.getCreationTime()));
     return users;
   }
 
