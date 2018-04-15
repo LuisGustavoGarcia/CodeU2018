@@ -23,7 +23,7 @@ public class User {
   private final String name;
   private final String hashedPassword; 	// Jean added this for part 2; Luis renamed this variable for part 9
   private final Instant creation; 
-  private String aboutMe; // this String holds the information to be used in the "About Me" section
+  private String aboutMe; // this String holds the information to be used in the "About Me" section (Lina)
 
   /**
    * Constructs a new User.
@@ -38,7 +38,7 @@ public class User {
     this.name = name;
     this.hashedPassword = password; 		//Jean added password to constructor; Luis renamed this variable for part 9
     this.creation = creation;
-    this.aboutMe = "No profile information yet!";
+    this.aboutMe = "No profile information yet!"; // added by Lina (Project 2)
   }
 
   /** Returns the ID of this User. */
@@ -62,12 +62,12 @@ public class User {
   }
   
   /** Sets the aboutMe String of the User. */
-  public void setAboutMe(String aboutMe) {
+  public void setAboutMe(String aboutMe) { // added by Lina (Project 2)
 	  this.aboutMe = aboutMe; 
   }
   
   /** Returns the About Me information of this User */
-  public String getAboutMe() {
+  public String getAboutMe() { // added by Lina (Project 2)
 	  return aboutMe; 
   }
 }
