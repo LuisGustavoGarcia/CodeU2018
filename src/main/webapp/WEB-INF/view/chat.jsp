@@ -92,6 +92,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
         <p id="pInput" class="editor" title="Enter your message."></p>
         <br/>
         <button type="submit" onclick="getMessage()">Send</button>
+        <input type="hidden" value="message" name="message" id="hiddenInput" />
     </form>
     <% } else { %>
       <p><a href="/login">Login</a> to send a message.</p>

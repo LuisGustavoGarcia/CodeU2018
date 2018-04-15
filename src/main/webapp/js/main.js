@@ -16,14 +16,7 @@ function command(name){
 
 function getMessage(){
   var elem = document.getElementById('pInput');
-  var message1 = elem.innerHTML;
-  //TODO: Need to send this variable to the JavaServlet's "messageContent" somehow.
+  var message = elem.innerHTML;
+  elem = document.getElementById('hiddenInput');
+  elem.setAttribute("value", message);
 }
-
-// function ShowResult()
-// {
-//     my_window = window.open("about:blank", "mywindow1");
-//     //By the above line code we have opened a new window
-//     my_window.document.write(x);
-//     //Here we have added the value of the textarea to the new window
-// }
