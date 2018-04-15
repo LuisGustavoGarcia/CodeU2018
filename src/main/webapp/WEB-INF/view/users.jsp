@@ -53,7 +53,7 @@ String sessionUser = (String) request.getSession().getAttribute("user");
     <% if (sessionUser != null && sessionUser.equals(user.getName())) { %>
     <h3>Edit your profile!</h3>
     <form action="/users/<%= user.getName() %>" method="POST">
-        <input id="profile" type="text" name="profile" value=<%= user.getAboutMe() %>>
+        <input id="profile" type="text" name="profile" value= "<%= user.getAboutMe() %>">
         <br/><br/>
         <button type="submit">Update profile!</button>
     </form>
@@ -64,7 +64,8 @@ String sessionUser = (String) request.getSession().getAttribute("user");
     <div id="messages">
     <ul>
     <%
-      for (Message message : messages) {
+      for (int i = 0; i < Math.min(messages.size(), 30); i++) {
+        Message message = messages.get(i);
     %>
         <li><strong><%= message.getCreationTime() %>:</strong> <%= message.getContent() %></li>
     <%

@@ -75,7 +75,7 @@ public class UsersServlet extends HttpServlet {
   }
 
   /**
-   * This function fires when a user navigates to the chat page. It gets the conversation title from
+   * This function fires when a user navigates to the user page. It gets the user  name from
    * the URL, finds the corresponding Conversation, and fetches the messages in that Conversation.
    * It then forwards to chat.jsp for rendering.
    */
