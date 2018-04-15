@@ -14,11 +14,11 @@ function command(name){
   }
 }
 
-// function setMessage(){
-//   var elem = document.getElementById('pInput');
-//   var message1 = elem.text();
-//   print(message1);
-// }
+function getMessage(){
+  var elem = document.getElementById('pInput');
+  var message1 = elem.innerHTML;
+  //TODO: Need to send this variable to the JavaServlet's "messageContent" somehow.
+}
 
 // function ShowResult()
 // {
