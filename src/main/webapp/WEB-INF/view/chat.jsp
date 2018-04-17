@@ -83,16 +83,20 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <hr/>
 
     <% if (request.getSession().getAttribute("user") != null) { %>
-    <button onmousedown="event.preventDefault();" onclick="command('bold')">Bold</button>
-    <button onmousedown="event.preventDefault();" onclick="command('italic')">Italics</button>
-    <button onmousedown="event.preventDefault();" onclick="command('underline')">Underline</button>
-    <button onmousedown="event.preventDefault();" onclick="command('superscript')">Superscript</button>
+    <button class="editButtons" onmousedown="event.preventDefault();" onclick="command('bold')"><img class="icon" src="../../../assets/bold.png"/></button>
+    <button class="editButtons" onmousedown="event.preventDefault();" onclick="command('italic')"><img class="icon" src="../../../assets/italic.png"/></button>
+    <button class="editButtons" onmousedown="event.preventDefault();" onclick="command('underline')"><img class="icon" src="../../../assets/underline.png"/></button>
+    <button class="editButtons" onmousedown="event.preventDefault();" onclick="command('strikethrough')"><img class="icon" src="../../../assets/strikethrough.png"/></button>
+    <button class="editButtons" onmousedown="event.preventDefault();" onclick="command('superscript')"><img class="icon" src="../../../assets/superscript.png"/></button>
+    <button class="editButtons" onmousedown="event.preventDefault();" onclick="command('subscript')"><img class="icon" src="../../../assets/subscript.png"/></button>
 
     <form action="/chat/<%= conversation.getTitle() %>" method="POST">
+      <div>
         <p id="pInput" class="editor" title="Enter your message."></p>
-        <br/>
-        <button type="submit" onclick="getMessage()">Send</button>
-        <input type="hidden" value="message" name="message" id="hiddenInput" />
+        <button id="submitButton" type="submit" onclick="getMessage()">Send</button>
+      </div>
+      <br/>
+      <input type="hidden" value="message" name="message" id="hiddenInput" />
     </form>
     <% } else { %>
       <p><a href="/login">Login</a> to send a message.</p>
