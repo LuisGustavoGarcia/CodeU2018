@@ -16,40 +16,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CodeU Chat App</title>
+  <title>Indie Ozone's Chat App</title>
   <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
+  <div id="login_area">
+    <h1 id="welcome_title">Welcome</h1>
+    <button onclick="loginMode()">Existing User</button>
+    <button onclick="registerMode()">New User</button>
 
-  <nav>
-   <a id="navTitle" href="/">CodeU Chat App</a>
-   <a href="/conversations">Conversations</a>
-   <% if(request.getSession().getAttribute("user") != null){ %>
-     <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
-   <% } else{ %>
-     <a href="/login">Login</a>
-     <a href="/register">Register</a>
-   <% } %>
-   <a href="/about.jsp">About</a>
- </nav>
+    <form id="login_form" action="/login" method="POST">
+      <label for="username">Username: </label>
+      <input type="text" name="username" id="username">
+      <br/>
+      <label for="password">Password: </label>
+      <input type="password" name="password" id="password">
+      <br/><br/>
+      <button type="submit">Login</button>
+    </form>
 
-  <div id="container">
-    <div
-      style="width:75%; margin-left:auto; margin-right:auto; margin-top: 50px;">
+    <form id="register_form" action="/register" method="POST">
+      <label for="username">Username: </label>
+      <input type="text" name="username" id="username">
+      <br/>
+      <label for="password">Password: </label>
+      <input type="password" name="password" id="password">
+      <br/><br/>
+      <button type="submit">Register</button>
+    </form>
 
-      <h1>CodeU Chat App</h1>
-      <h2>Welcome to Team 15's Chat App!! &#128526; &#128526;</h2>
-
-      <ul>
-        <li><a href="/login">Login</a> to get started.</li>
-        <li>Go to the <a href="/conversations">conversations</a> page to
-            create or join a conversation.</li>
-        <li>View the <a href="/about.jsp">about</a> page to learn more about the
-            project.</li>
-        <li>You can <a href="/testdata">load test data</a> to fill the site with
-            example data.</li>
-      </ul>
-    </div>
+    <% if(request.getAttribute("error") != null){ %>
+        <h2 id="login_error_msg"><%= request.getAttribute("error") %></h2>
+    <% } %>
   </div>
+
+  <script src="../../../js/index.js"></script>
 </body>
 </html>
