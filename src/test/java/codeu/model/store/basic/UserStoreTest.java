@@ -83,11 +83,28 @@ public class UserStoreTest {
   public void testIsUserRegistered_false() {
     Assert.assertFalse(userStore.isUserRegistered("fake username"));
   }
+  
+  @Test //added by Lina (Project 2)
+  public void testUpdateUser() {
+	  // create and add user to the userStore
+	  User inputUser = new User(UUID.randomUUID(), "test_username", "test_pw", Instant.now());
+	  userStore.addUser(inputUser);
+	  Assert.assertEquals(inputUser.getAboutMe(), "No profile information yet!");
+	  
+	  // update the user's information
+	  inputUser.setAboutMe("New profile info");
+	  userStore.updateUser(inputUser);
+	  
+	  // assert the user information can be retrieved with the updated information
+	  User storedUser = userStore.getUser(inputUser.getId());
+	  assertEquals(inputUser, storedUser);
+  }
 
   private void assertEquals(User expectedUser, User actualUser) {
     Assert.assertEquals(expectedUser.getId(), actualUser.getId());
     Assert.assertEquals(expectedUser.getName(), actualUser.getName());
     Assert.assertEquals(expectedUser.getPassword(), actualUser.getPassword());
     Assert.assertEquals(expectedUser.getCreationTime(), actualUser.getCreationTime());
+    Assert.assertEquals(expectedUser.getAboutMe(), actualUser.getAboutMe());
   }
 }

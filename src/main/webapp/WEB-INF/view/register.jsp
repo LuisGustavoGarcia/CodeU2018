@@ -31,7 +31,7 @@
 
    <form action="/register" method="POST">
      <label for="username">Username: </label>
-     <input type="text" name="username" id="username">
+     <input type="text" name="username" id="username" pattern="[^\s]+"  title="please do not use the white space" required>
      <br/>
      <label for="password">Password: </label>
      <input type="password" name="password" id="password">

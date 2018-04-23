@@ -57,7 +57,7 @@ public class PersistentDataStoreTest {
 
     // load
     List<User> resultUsers = persistentDataStore.loadUsers();
-
+   
     // confirm that what we saved matches what we loaded
     User resultUserOne = resultUsers.get(0);
     Assert.assertEquals(idOne, resultUserOne.getId());
@@ -68,6 +68,42 @@ public class PersistentDataStoreTest {
     Assert.assertEquals(idTwo, resultUserTwo.getId());
     Assert.assertEquals(nameTwo, resultUserTwo.getName());
     Assert.assertEquals(creationTwo, resultUserTwo.getCreationTime());
+  }
+  
+  @Test //added by Lina
+  public void testSaveLoadAndUpdateUsers() throws PersistentDataStoreException {
+	  UUID idOne = UUID.randomUUID();
+
+	    String nameOne = "test_username_one"; 
+	    String password1 = "test_pw_one"; 			//Jean added tests for password (part 2) 
+	    String aboutMe = "new_info";
+	    Instant creationOne = Instant.ofEpochMilli(1000);
+	    User inputUserOne = new User(idOne, nameOne, password1, creationOne);
+
+	    // save
+	    persistentDataStore.writeThrough(inputUserOne);
+
+	    // load
+	    List<User> resultUsers = persistentDataStore.loadUsers();
+	   
+	    // confirm that what we saved matches what we loaded
+	    User resultUserOne = resultUsers.get(0);
+	    Assert.assertEquals(idOne, resultUserOne.getId());
+	    Assert.assertEquals(nameOne, resultUserOne.getName());
+	    Assert.assertEquals(creationOne, resultUserOne.getCreationTime());
+	    
+	    // update the user information
+	    inputUserOne.setAboutMe(aboutMe);
+	    persistentDataStore.writeThrough(inputUserOne);
+	    
+	    // load back the information
+	    resultUsers = persistentDataStore.loadUsers();
+	    
+	    // confirm that the user information has been indeed updated
+	    resultUserOne = resultUsers.get(0);
+	    Assert.assertEquals(idOne, resultUserOne.getId());
+	    Assert.assertEquals(nameOne, resultUserOne.getName());
+	    Assert.assertEquals(aboutMe, resultUserOne.getAboutMe());
   }
 
   @Test
