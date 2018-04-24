@@ -20,11 +20,11 @@
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/index.css">
 </head>
-<body>
+<body style="vertical-align: middle">
   <div id="login_area">
     <h1 id="welcome_title">Welcome</h1>
-    <button onclick="loginMode()">Existing User</button>
-    <button onclick="registerMode()">New User</button>
+    <button style="float: left" class="buttons" onclick="loginMode()">Existing User</button>
+    <button style="float: left" class="buttons" onclick="registerMode()">New User</button>
 
     <form id="login_form" action="/login" method="POST">
       <label for="username">Username: </label>
@@ -33,7 +33,7 @@
       <label for="password">Password: </label>
       <input type="password" name="password" id="password">
       <br/><br/>
-      <button type="submit">Login</button>
+      <button style="border-radius: 5px" class="buttons" type="submit">Login</button>
     </form>
 
     <form id="register_form" action="/register" method="POST">
@@ -43,7 +43,7 @@
       <label for="password">Password: </label>
       <input type="password" name="password" id="password">
       <br/><br/>
-      <button type="submit">Register</button>
+      <button style="border-radius: 5px" class="buttons" type="submit">Register</button>
     </form>
 
     <% if(request.getAttribute("error") != null){ %>
