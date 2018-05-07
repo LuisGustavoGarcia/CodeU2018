@@ -21,34 +21,42 @@
   <link rel="stylesheet" href="/css/index.css">
 </head>
 <body style="vertical-align: middle">
-  <div id="login_area">
-    <h1 id="welcome_title">Welcome</h1>
-    <button style="float: left" class="buttons" onclick="loginMode()">Existing User</button>
-    <button style="float: left" class="buttons" onclick="registerMode()">New User</button>
+  <div>
+    <div id="image_area">
+      <img id="earth" src="../assets/Earth.png"/>
+      <img id="clouds" src="../assets/Clouds.png"/>
+      <img id="satellite" src="../assets/Satellite.png"/>
+    </div>
 
-    <form id="login_form" action="/login" method="POST">
-      <label for="username">Username: </label>
-      <input type="text" name="username" id="username">
-      <br/>
-      <label for="password">Password: </label>
-      <input type="password" name="password" id="password">
-      <br/><br/>
-      <button style="border-radius: 5px" class="buttons" type="submit">Login</button>
-    </form>
+    <div id="login_area">
+      <h1 id="welcome_title">Welcome</h1>
+      <button style="float: left" class="buttons" onclick="loginMode()">Existing User</button>
+      <button style="float: left" class="buttons" onclick="registerMode()">New User</button>
 
-    <form id="register_form" action="/register" method="POST">
-      <label for="username">Username: </label>
-      <input type="text" name="username" id="username">
-      <br/>
-      <label for="password">Password: </label>
-      <input type="password" name="password" id="password">
-      <br/><br/>
-      <button style="border-radius: 5px" class="buttons" type="submit">Register</button>
-    </form>
+      <form id="login_form" action="/login" method="POST">
+        <label for="username">Username: </label>
+        <input type="text" name="username" id="username">
+        <br/>
+        <label for="password">Password: </label>
+        <input type="password" name="password" id="password">
+        <br/><br/>
+        <button style="border-radius: 5px" class="buttons" type="submit">Login</button>
+      </form>
 
-    <% if(request.getAttribute("error") != null){ %>
-        <h2 id="login_error_msg"><%= request.getAttribute("error") %></h2>
-    <% } %>
+      <form id="register_form" action="/register" method="POST">
+        <label for="username">Username: </label>
+        <input type="text" name="username" id="username">
+        <br/>
+        <label for="password">Password: </label>
+        <input type="password" name="password" id="password">
+        <br/><br/>
+        <button style="border-radius: 5px" class="buttons" type="submit">Register</button>
+      </form>
+
+      <% if(request.getAttribute("error") != null){ %>
+          <h2 id="login_error_msg"><%= request.getAttribute("error") %></h2>
+      <% } %>
+    </div>
   </div>
 
   <script src="../../../js/index.js"></script>

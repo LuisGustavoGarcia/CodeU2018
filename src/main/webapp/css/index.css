@@ -12,6 +12,7 @@
   text-align: center;
   border-radius: 0 0 25px 25px;
   box-shadow: 20px 20px 1px 5px #FFB74D;
+  margin-left: 80%;
 }
 
 #login_error_msg {
@@ -35,4 +36,10 @@
   width: 150px;
   border: solid #FF6D00 1px;
   margin-top: 0px;
+}
+
+#earth, #clouds, #satellite {
+  position: absolute;
+  margin-left: 10%;
+  margin-top: 5%;
 }
