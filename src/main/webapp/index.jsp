@@ -15,12 +15,13 @@
 --%>
 <!DOCTYPE html>
 <html>
+<meta name="viewport" content="width=device-width" />
 <head>
   <title>Indie Ozone's Chat App</title>
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/index.css">
 </head>
-<body style="vertical-align: middle">
+<body class="body" style="vertical-align: middle">
   <div>
     <div id="image_area">
       <img id="earth" src="../assets/Earth.png"/>
