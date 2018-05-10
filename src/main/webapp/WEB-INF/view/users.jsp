@@ -14,7 +14,9 @@
   limitations under the License.
 --%>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
 <%@ page import="codeu.model.data.Message" %>
+<%@ page import="codeu.model.data.Conversation" %>
 <%@ page import="codeu.model.data.User" %>
 <%@ page import="codeu.model.store.basic.UserStore" %>
 <%
@@ -57,6 +59,33 @@ String sessionUser = (String) request.getSession().getAttribute("user");
         <br/><br/>
         <button type="submit">Update profile!</button>
     </form>
+        <% if (!user.getMentions().isEmpty()) { 
+           Map<Conversation, List<Message>> mentions = user.getMentions();
+           %>
+                <h3>You've been tagged in the following conversations:</h3>
+                <% for (Conversation conv : mentions.keySet()) { 
+                   String conversationTitle = conv.getTitle();
+                %>
+                <div id="messages">
+                    <ul>
+                        <li><strong><%= conversationTitle %>:</strong>
+                            <ul>
+                                <%
+                                  List<Message> mentionList = mentions.get(conv);
+                                  for (int i = 0; i < Math.min(mentionList.size(), 20); i++) {
+                                    Message mention = mentionList.get(i);
+                                %>
+                                    <li><strong><%= mention.getCreationTime() %>:</strong> <%= mention.getContent() %></li>
+                                <%
+                                  }
+                                %>
+                            </ul>
+                        </li>
+                     </ul>
+                    </div>
+                <%} %>
+        <% } %>
+        
     <% } %>
         
     <h2><%= user.getName()%>'s Messages</h2>

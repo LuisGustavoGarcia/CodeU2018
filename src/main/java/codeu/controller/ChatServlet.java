@@ -22,6 +22,7 @@ import codeu.model.store.basic.MessageStore;
 import codeu.model.store.basic.UserStore;
 import java.io.IOException;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletException;
@@ -142,17 +143,55 @@ public class ChatServlet extends HttpServlet {
 
     // this removes any HTML from the message content
     String cleanedMessageContent = Jsoup.clean(messageContent, Whitelist.relaxed());
-
+    
+    String keyword = "@";
+    List<Integer> nameIndexes = new ArrayList<>();
+    List<String> mentions = new ArrayList<>();
+    
+	int index = cleanedMessageContent.indexOf(keyword);
+	while (index >=0){
+		nameIndexes.add(index);
+		index = cleanedMessageContent.indexOf(keyword, index+keyword.length());
+	}
+	
+	
+	// get all the names mentioned after '@'; 
+	for (int i = 0; i < nameIndexes.size(); i++) {
+	    int firstLetter = nameIndexes.get(i) + 1;
+	    String name = cleanedMessageContent.substring(firstLetter);
+	    int endIndex = name.indexOf(' ');
+	    int next = name.indexOf('@');
+	    if (endIndex > 0) {
+	        endIndex = Math.min(endIndex, name.length()-1);
+	    } else {
+	        endIndex = name.length();
+	    }
+	    if (next > 0) {
+	        endIndex = Math.min(endIndex, next);
+	    }
+	    name = name.substring(0, endIndex);
+	    mentions.add(name);
+	}
+	
+	
     Message message =
-        new Message(
-            UUID.randomUUID(),
-            conversation.getId(),
-            user.getId(),
-            cleanedMessageContent,
-            Instant.now());
+            new Message(
+                UUID.randomUUID(),
+                conversation.getId(),
+                user.getId(),
+                cleanedMessageContent,
+                Instant.now());
 
-    messageStore.addMessage(message);
+        messageStore.addMessage(message);
 
+    	for (String usernameMentioned : mentions) {
+    		User userMentioned = userStore.getUser(usernameMentioned);
+    		System.out.println("mentioned: " + userMentioned);
+    	    if (user != null) {
+    	    		userMentioned.addMention(message, conversation);
+    	    		userStore.addUser(userMentioned);
+    	    }
+    	}
     // redirect to a GET request
     response.sendRedirect("/chat/" + conversationTitle);
   }
