@@ -100,8 +100,18 @@ public class UserStore {
 
   /** Add a new user to the current set of users known to the application. */
   public void addUser(User user) {
-    users.add(user);
+	users.add(user);
     persistentStorageAgent.writeThrough(user);
+  }
+  
+  /** Updates an existing user in the datastore **/
+  public void updateUser(User user) {
+	  // Lina added this method (Project 2)
+	  if (!users.contains(user)) {
+		  System.out.println("User doesn't exist");
+	  } else {
+		  persistentStorageAgent.writeThrough(user);
+	  }
   }
 
   /** Return true if the given username is known to the application. */
