@@ -81,7 +81,8 @@ public class UsersServletTest { // tests added by Lina (Project 2)
             UUID.randomUUID(),
             fakeUserId,
             "test message",
-            Instant.now()));
+            Instant.now(), 
+            UUID.randomUUID()));
     Mockito.when(mockMessageStore.getMessagesFromAuthor(fakeUserId))
         .thenReturn(fakeMessageList);
 

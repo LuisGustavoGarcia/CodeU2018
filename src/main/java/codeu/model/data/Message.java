@@ -15,6 +15,7 @@
 package codeu.model.data;
 
 import java.time.Instant;
+import java.util.Comparator;
 import java.util.UUID;
 
 /** Class representing a message. Messages are sent by a User in a Conversation. */
@@ -24,7 +25,8 @@ public class Message {
   private final UUID conversation;
   private final UUID author;
   private final String content;
-  private final Instant creation;
+  private final Instant creation; 
+  private final UUID groupID; // group meaning which convo thread the message belongs to. -Jean 
 
   /**
    * Constructs a new Message.
@@ -33,14 +35,16 @@ public class Message {
    * @param conversation the ID of the Conversation this Message belongs to
    * @param author the ID of the User who sent this Message
    * @param content the text content of this Message
-   * @param creation the creation time of this Message
+   * @param creation the creation time of this Message 
+   * @param groupID is the ID of the first message sent in the conversation thread  
    */
-  public Message(UUID id, UUID conversation, UUID author, String content, Instant creation) {
+  public Message(UUID id, UUID conversation, UUID author, String content, Instant creation, UUID groupID) {
     this.id = id;
     this.conversation = conversation;
     this.author = author;
     this.content = content;
     this.creation = creation;
+    this.groupID = groupID; 
   }
 
   /** Returns the ID of this Message. */
@@ -67,4 +71,10 @@ public class Message {
   public Instant getCreationTime() {
     return creation;
   }
+  
+  /** Returns the ID of the Group this Message belongs to. */ 
+  public UUID getGroupID() {
+    return groupID;
+  } 
+  
 }

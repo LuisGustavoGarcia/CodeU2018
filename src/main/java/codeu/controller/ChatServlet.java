@@ -149,7 +149,9 @@ public class ChatServlet extends HttpServlet {
             conversation.getId(),
             user.getId(),
             cleanedMessageContent,
-            Instant.now());
+            Instant.now(),
+        	UUID.randomUUID()); 
+    //TODO: (Jean) sometimes we don't want a random group ID 
 
     messageStore.addMessage(message);
 
