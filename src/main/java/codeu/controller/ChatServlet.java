@@ -149,27 +149,34 @@ public class ChatServlet extends HttpServlet {
     List<String> mentions = new ArrayList<>();
     
 	int index = cleanedMessageContent.indexOf(keyword);
-	while (index >=0){
-		nameIndexes.add(index);
-		index = cleanedMessageContent.indexOf(keyword, index+keyword.length());
+	if (cleanedMessageContent.length() > 1) {
+		while (index >=0){
+			nameIndexes.add(index);
+			index = cleanedMessageContent.indexOf(keyword, index+keyword.length());
+		}
 	}
-	
 	
 	// get all the names mentioned after '@'; 
 	for (int i = 0; i < nameIndexes.size(); i++) {
 	    int firstLetter = nameIndexes.get(i) + 1;
 	    String name = cleanedMessageContent.substring(firstLetter);
 	    int endIndex = name.indexOf(' ');
-	    int next = name.indexOf('@');
-	    if (endIndex > 0) {
-	        endIndex = Math.min(endIndex, name.length()-1);
-	    } else {
-	        endIndex = name.length();
+	    int currIndex = 0;
+	    while (Character.isDigit(name.charAt(currIndex)) || Character.isLetter(name.charAt(currIndex))) {
+	    		currIndex++;
+	    	 	if (currIndex >= name.length()) break;	
 	    }
-	    if (next > 0) {
-	        endIndex = Math.min(endIndex, next);
-	    }
+	    endIndex = currIndex; 
+	    
 	    name = name.substring(0, endIndex);
+	    if (userStore.getUser(name) != null) {
+	    	cleanedMessageContent = cleanedMessageContent.substring(0, firstLetter-1) 
+	    							+ "<b>@" + name + "</b>" 
+	    							+ cleanedMessageContent.substring(firstLetter+name.length());
+	    	if (i+1 < nameIndexes.size()) {
+	    		nameIndexes.set(i+1,nameIndexes.get(i+1) + 7);
+	    	}
+	    }
 	    mentions.add(name);
 	}
 	
@@ -185,9 +192,8 @@ public class ChatServlet extends HttpServlet {
         messageStore.addMessage(message);
 
     	for (String usernameMentioned : mentions) {
-    		User userMentioned = userStore.getUser(usernameMentioned);
-    		System.out.println("mentioned: " + userMentioned);
-    	    if (user != null) {
+    	    if (userStore.isUserRegistered(usernameMentioned)) {
+    	    		User userMentioned = userStore.getUser(usernameMentioned);
     	    		userMentioned.addMention(message, conversation);
     	    		userStore.addUser(userMentioned);
     	    }

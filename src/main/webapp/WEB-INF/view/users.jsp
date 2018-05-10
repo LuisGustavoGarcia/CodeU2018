@@ -68,7 +68,7 @@ String sessionUser = (String) request.getSession().getAttribute("user");
                 %>
                 <div id="messages">
                     <ul>
-                        <li><strong><%= conversationTitle %>:</strong>
+                        <li><strong><a href="/chat/<%= conversationTitle %>"><%= conversationTitle %></a>:</strong>
                             <ul>
                                 <%
                                   List<Message> mentionList = mentions.get(conv);
