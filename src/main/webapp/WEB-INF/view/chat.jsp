@@ -27,6 +27,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
 <head>
   <title><%= conversation.getTitle() %></title>
   <link rel="stylesheet" href="/css/main.css" type="text/css">
+  <link rel="stylesheet" href="/css/chat.css" type="text/css">
 
   <style>
     #chat {
@@ -72,7 +73,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
         String author = UserStore.getInstance()
           .getUser(message.getAuthorId()).getName();
     %>
-      <li><strong><%= author %>:</strong> <%= message.getContent() %></li>
+      <li><strong><a href="/users/<%= author %>"><%= author %></a>:</strong> <%= message.getContent() %></li>
     <%
       }
     %>
@@ -82,10 +83,20 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <hr/>
 
     <% if (request.getSession().getAttribute("user") != null) { %>
+    <button class="editButtons" onmousedown="event.preventDefault();" onclick="command('bold')"><img class="icon" src="../../../assets/bold.png"/></button>
+    <button class="editButtons" onmousedown="event.preventDefault();" onclick="command('italic')"><img class="icon" src="../../../assets/italic.png"/></button>
+    <button class="editButtons" onmousedown="event.preventDefault();" onclick="command('underline')"><img class="icon" src="../../../assets/underline.png"/></button>
+    <button class="editButtons" onmousedown="event.preventDefault();" onclick="command('strikethrough')"><img class="icon" src="../../../assets/strikethrough.png"/></button>
+    <button class="editButtons" onmousedown="event.preventDefault();" onclick="command('superscript')"><img class="icon" src="../../../assets/superscript.png"/></button>
+    <button class="editButtons" onmousedown="event.preventDefault();" onclick="command('subscript')"><img class="icon" src="../../../assets/subscript.png"/></button>
+
     <form action="/chat/<%= conversation.getTitle() %>" method="POST">
-        <input type="text" name="message">
-        <br/>
-        <button type="submit">Send</button>
+      <div>
+        <p id="pInput" class="editor" title="Enter your message."></p>
+        <button id="submitButton" type="submit" onclick="getMessage()">Send</button>
+      </div>
+      <br/>
+      <input type="hidden" value="message" name="message" id="hiddenInput" />
     </form>
     <% } else { %>
       <p><a href="/login">Login</a> to send a message.</p>
@@ -94,6 +105,6 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <hr/>
 
   </div>
-
+  <script src="../../../js/main.js"></script>
 </body>
 </html>
