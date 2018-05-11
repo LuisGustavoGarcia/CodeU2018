@@ -99,6 +99,13 @@ public class ConversationServlet extends HttpServlet {
       return;
     }
 
+    String searchTitle = request.getParameter("searchTitle");
+    if(conversationStore.getConversationWithTitle(searchTitle) != null) {
+      request.setAttribute("searchTag", "true");
+      request.getRequestDispatcher("/WEB-INF/view/conversations.jsp").forward(request, response);
+      return;
+    }
+
     String conversationTitle = request.getParameter("conversationTitle");
     if (!conversationTitle.matches("[\\w*]*")) {
       request.setAttribute("error", "Please enter only letters and numbers.");

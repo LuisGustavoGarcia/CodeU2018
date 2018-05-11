@@ -56,11 +56,60 @@
       <hr/>
     <% } %>
 
-    <h1>Conversations</h1>
+
+    <h1>Queried Conversations</h1>
+
+    <form action="/conversations" method="GET">
+      <div class="form-group">
+        <label class="form-control-label">Search:</label>
+        <input type="text" name="searchTitle">
+      </div>
+
+      <button type="submit">Search</button>
+    </form>
+
+    <% if(request.getAttribute("searchTag") != null){ %>
+        <h2 style="color:red"><%= request.getAttribute("searchTag") %></h2>
+    <% } %>
 
     <%
     List<Conversation> conversations =
       (List<Conversation>) request.getAttribute("conversations");
+    if(conversations == null || conversations.isEmpty()){
+    %>
+      <p>No such query exists.</p>
+    <%
+    }
+    else{
+    %>
+      <ul class="mdl-list">
+    <%
+      for(Conversation conversation : conversations){
+        if(conversation.getTitle().equals("Hello")) {
+    %>
+      <li><a href="/chat/<%= conversation.getTitle() %>">
+        <%= conversation.getTitle() %></a></li>
+    <%
+        }
+        else {
+    %>
+        <%-- <p>nope </p> --%>
+    <%
+        }
+      }
+    %>
+      </ul>
+    <%
+    }
+    %>
+
+    <hr/>
+
+    <h1>All Conversations</h1>
+
+    <%
+    // List<Conversation> conversations =
+    //   (List<Conversation>) request.getAttribute("conversations");
     if(conversations == null || conversations.isEmpty()){
     %>
       <p>Create a conversation to get started.</p>
