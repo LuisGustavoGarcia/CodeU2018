@@ -59,7 +59,7 @@
 
     <h1>Queried Conversations</h1>
 
-    <form action="/conversations" method="GET">
+    <form action="/conversations" method="POST">
       <div class="form-group">
         <label class="form-control-label">Search:</label>
         <input type="text" name="searchTitle">
@@ -68,40 +68,20 @@
       <button type="submit">Search</button>
     </form>
 
-    <% if(request.getAttribute("searchTag") != null){ %>
-        <h2 style="color:red"><%= request.getAttribute("searchTag") %></h2>
-    <% } %>
+
 
     <%
     List<Conversation> conversations =
       (List<Conversation>) request.getAttribute("conversations");
-    if(conversations == null || conversations.isEmpty()){
     %>
-      <p>No such query exists.</p>
-    <%
-    }
-    else{
-    %>
-      <ul class="mdl-list">
-    <%
-      for(Conversation conversation : conversations){
-        if(conversation.getTitle().equals("Hello")) {
-    %>
-      <li><a href="/chat/<%= conversation.getTitle() %>">
-        <%= conversation.getTitle() %></a></li>
-    <%
-        }
-        else {
-    %>
-        <%-- <p>nope </p> --%>
-    <%
-        }
-      }
-    %>
-      </ul>
-    <%
-    }
-    %>
+
+    <% if(request.getAttribute("searchTag") != null) { %>
+        <ul class="mdl-list">
+        <li><a href="/chat/<%= request.getAttribute("searchTag") %>">
+          <%= request.getAttribute("searchTag") %></a></li>
+        </ul>
+    <% }  %>
+
 
     <hr/>
 

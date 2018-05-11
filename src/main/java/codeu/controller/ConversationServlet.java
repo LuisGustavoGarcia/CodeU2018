@@ -100,11 +100,19 @@ public class ConversationServlet extends HttpServlet {
     }
 
     String searchTitle = request.getParameter("searchTitle");
+
+    // if(conversationStore.getConversationWithTitle(searchTitle) == null) {
+    //   request.setAttribute("searchTag", "No such conversation.");
+    //   request.getRequestDispatcher("/WEB-INF/view/conversations.jsp").forward(request, response);
+    //   return;
+    // }
+
     if(conversationStore.getConversationWithTitle(searchTitle) != null) {
-      request.setAttribute("searchTag", "true");
+      request.setAttribute("searchTag", searchTitle);
       request.getRequestDispatcher("/WEB-INF/view/conversations.jsp").forward(request, response);
       return;
     }
+
 
     String conversationTitle = request.getParameter("conversationTitle");
     if (!conversationTitle.matches("[\\w*]*")) {
