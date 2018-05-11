@@ -75,21 +75,21 @@
       (List<Conversation>) request.getAttribute("conversations");
     %>
 
-    <% if(request.getAttribute("searchTag") != null) { %>
+    <% if(request.getAttribute("searchTag") != null) {
+        if(request.getAttribute("searchTag").equals("No such convo.")) {%>
+          <p> No such convo. </p>
+    <% } else { %>
         <ul class="mdl-list">
         <li><a href="/chat/<%= request.getAttribute("searchTag") %>">
           <%= request.getAttribute("searchTag") %></a></li>
         </ul>
-    <% }  %>
-
+    <% } } %>
 
     <hr/>
 
     <h1>All Conversations</h1>
-
     <%
-    // List<Conversation> conversations =
-    //   (List<Conversation>) request.getAttribute("conversations");
+
     if(conversations == null || conversations.isEmpty()){
     %>
       <p>Create a conversation to get started.</p>

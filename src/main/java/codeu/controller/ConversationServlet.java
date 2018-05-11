@@ -100,38 +100,39 @@ public class ConversationServlet extends HttpServlet {
     }
 
     String searchTitle = request.getParameter("searchTitle");
-
-    // if(conversationStore.getConversationWithTitle(searchTitle) == null) {
-    //   request.setAttribute("searchTag", "No such conversation.");
-    //   request.getRequestDispatcher("/WEB-INF/view/conversations.jsp").forward(request, response);
-    //   return;
-    // }
-
-    if(conversationStore.getConversationWithTitle(searchTitle) != null) {
-      request.setAttribute("searchTag", searchTitle);
-      request.getRequestDispatcher("/WEB-INF/view/conversations.jsp").forward(request, response);
-      return;
-    }
-
-
     String conversationTitle = request.getParameter("conversationTitle");
-    if (!conversationTitle.matches("[\\w*]*")) {
-      request.setAttribute("error", "Please enter only letters and numbers.");
+
+    if(searchTitle != null) {
+      if(conversationStore.getConversationWithTitle(searchTitle) != null) {
+        request.setAttribute("searchTag", searchTitle);
+        request.getRequestDispatcher("/WEB-INF/view/conversations.jsp").forward(request, response);
+        return;
+      }
+      request.setAttribute("searchTag", "No such convo.");
       request.getRequestDispatcher("/WEB-INF/view/conversations.jsp").forward(request, response);
       return;
+      // response.sendRedirect("/conversations");
     }
+    else if(conversationTitle != null) {
+      if (!conversationTitle.matches("[\\w*]*")) {
+        request.setAttribute("error", "Please enter only letters and numbers.");
+        request.getRequestDispatcher("/WEB-INF/view/conversations.jsp").forward(request, response);
+        return;
+      }
 
-    if (conversationStore.isTitleTaken(conversationTitle)) {
-      // conversation title is already taken, just go into that conversation instead of creating a
-      // new one
+      if (conversationStore.isTitleTaken(conversationTitle)) {
+        // conversation title is already taken, just go into that conversation instead of creating a
+        // new one
+        response.sendRedirect("/chat/" + conversationTitle);
+        return;
+      }
+
+      Conversation conversation =
+          new Conversation(UUID.randomUUID(), user.getId(), conversationTitle, Instant.now());
+
+      conversationStore.addConversation(conversation);
       response.sendRedirect("/chat/" + conversationTitle);
-      return;
     }
 
-    Conversation conversation =
-        new Conversation(UUID.randomUUID(), user.getId(), conversationTitle, Instant.now());
-
-    conversationStore.addConversation(conversation);
-    response.sendRedirect("/chat/" + conversationTitle);
   }
 }
