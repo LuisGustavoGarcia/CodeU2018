@@ -53,6 +53,7 @@
   box-shadow: 20px 20px 1px 5px #FFB74D;
 }
 
+/* For Smaller Screens, hide the graphics and just focus on the login forms */
 @media screen and (max-width: 600px) {
     #login_area {
       float: none;
@@ -72,6 +73,7 @@
     }
 }
 
+/* This will remove scroll bars on the side of Chrome Pages */
 .body {
   overflow: hidden;
 }

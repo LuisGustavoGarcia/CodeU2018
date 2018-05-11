@@ -23,23 +23,6 @@ body {
   background-color: #FFE0B2;
 }
 
-nav {
-  background-color: #E65100;
-  height: 40px;
-}
-
-nav a {
-  color: white;
-  display: inline-block;
-  font-size: 24px;
-  margin: 15px;
-  text-decoration: none;
-}
-
-#navTitle {
-  font-size: 20px;
-}
-
 #container {
   margin-left: auto;
   margin-right: auto;
@@ -65,6 +48,62 @@ button {
 }
 
 #profile {
-    width: 800px; 
-    height: 100px; 
+    width: 800px;
+    height: 100px;
+}
+
+#navButton {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  padding: 15px;
+}
+
+/* SIDENAV CSS AREA */
+/* The side navigation menu */
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #E65100;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+    align-content: center;
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.icon:hover {
+  height: 20px;
+  width: 20px;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 36px;
+    margin-left: 50px;
+    color: white;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
 }

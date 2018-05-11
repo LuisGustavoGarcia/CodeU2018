@@ -32,26 +32,22 @@ String sessionUser = (String) request.getSession().getAttribute("user");
 </head>
 <body>
 
-  <nav>
-   <a id="navTitle" href="/">CodeU Chat App</a>
-   <a href="/conversations">Conversations</a>
-   <% if(request.getSession().getAttribute("user") != null){ %>
-     <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
-   <% } else{ %>
-     <a href="/login">Login</a>
-     <a href="/register">Register</a>
-   <% } %>
-   <a href="/about.jsp">About</a>
- </nav>
-           
-           
+  <div id="mySidenav" class="sidenav">
+   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+   <a href="/index.jsp"><img src="../../../assets/home.png"></img></a>
+   <a href="/conversations"><img src="../../../assets/conversations.png"></img></a>
+   <a href="/about.jsp"><img src="../../../assets/about.png"></img></a>
+ </div>
+
+ <button id="navButton" onclick="openNav()"><img src="../../../assets/menu.png"</img></button>
+
   <div id="container">
 
     <h1><%= user.getName()%>'s Profile <a href="" style="float: right">&#8635;</a> </h1>
-        
+
     <h2>About <%= user.getName()%></h2>
     <p><%= user.getAboutMe()%></p>
-        
+
     <% if (sessionUser != null && sessionUser.equals(user.getName())) { %>
     <h3>Edit your profile!</h3>
     <form action="/users/<%= user.getName() %>" method="POST">
@@ -59,11 +55,11 @@ String sessionUser = (String) request.getSession().getAttribute("user");
         <br/><br/>
         <button type="submit">Update profile!</button>
     </form>
-        <% if (!user.getMentions().isEmpty()) { 
+        <% if (!user.getMentions().isEmpty()) {
            Map<Conversation, List<Message>> mentions = user.getMentions();
            %>
                 <h3>You've been tagged in the following conversations:</h3>
-                <% for (Conversation conv : mentions.keySet()) { 
+                <% for (Conversation conv : mentions.keySet()) {
                    String conversationTitle = conv.getTitle();
                 %>
                 <div id="messages">
@@ -85,9 +81,9 @@ String sessionUser = (String) request.getSession().getAttribute("user");
                     </div>
                 <%} %>
         <% } %>
-        
+
     <% } %>
-        
+
     <h2><%= user.getName()%>'s Messages</h2>
     <hr/>
     <div id="messages">

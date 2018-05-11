@@ -21,18 +21,16 @@
 </head>
 <body>
 
-  <nav>
-   <a id="navTitle" href="/">CodeU Chat App</a>
-   <a href="/conversations">Conversations</a>
-   <% if(request.getSession().getAttribute("user") != null){ %>
-     <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
-   <% } else{ %>
-     <a href="/login">Login</a>
-     <a href="/register">Register</a>
-   <% } %>
-   <a href="/about.jsp">About</a>
- </nav>
-       
+  <div id="mySidenav" class="sidenav">
+   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+   <a href="/index.jsp"><img src="../../../assets/home.png"></img></a>
+   <a href="/conversations"><img src="../../../assets/conversations.png"></img></a>
+   <a href="/about.jsp"><img src="../../../assets/about.png"></img></a>
+ </div>
+
+ <button id="navButton" onclick="openNav()"><img src="../../../assets/menu.png"</img></button>
+
+
   <div id="container">
     <h1>Load Test Data</h1>
     <p>This will load a number of users, conversations, and messages for testing

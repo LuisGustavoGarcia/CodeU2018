@@ -18,17 +18,15 @@
 </head>
 <body>
 
-   <nav>
-       <a id="navTitle" href="/">CodeU Chat App</a>
-       <a href="/conversations">Conversations</a>
-       <% if(request.getSession().getAttribute("user") != null){ %>
-         <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
-       <% } else{ %>
-         <a href="/login">Login</a>
-         <a href="/register">Register</a>
-       <% } %>
-       <a href="/about.jsp">About</a>
- </nav>
+  <div id="mySidenav" class="sidenav">
+   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+   <a href="/index.jsp"><img src="../../../assets/home.png"></img></a>
+   <a href="/conversations"><img src="../../../assets/conversations.png"></img></a>
+   <a href="/about.jsp"><img src="../../../assets/about.png"></img></a>
+ </div>
+
+ <button id="navButton" onclick="openNav()"><img src="../../../assets/menu.png"</img></button>
+
 
   <div id="container">
     <div
@@ -45,10 +43,10 @@
         Intelligence as well, which is where my interest within the tech industry lies. A few facts about
         me: I grew up in the Philippines before moving to the US just four years ago, I love traveling,
         and I experiment with cooking from time to time. I try not to burn the kitchen down. :)</li>
-      	<li><strong>Jean Leong</strong>Hihi! I'm a sophomore Computer Science & Engineering 
-      	major at Bucknell (we just won our championship game!! March madness, here we come!), 
-      	aspiring also to minor in Math and Spanish. I am from Westchester, New York (about 1 
-      	hour north of NYC) and grew up in Malaysia until I was in fifth grade before moving 
+      	<li><strong>Jean Leong</strong>Hihi! I'm a sophomore Computer Science & Engineering
+      	major at Bucknell (we just won our championship game!! March madness, here we come!),
+      	aspiring also to minor in Math and Spanish. I am from Westchester, New York (about 1
+      	hour north of NYC) and grew up in Malaysia until I was in fifth grade before moving
         to New York.</li>
       	<li><strong>Lina Sim</strong>: Hello! I'm currently a sophomore studying
       	CS at Brown, with an interest in front-end development
