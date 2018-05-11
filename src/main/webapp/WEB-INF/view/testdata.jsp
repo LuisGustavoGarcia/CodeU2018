@@ -40,5 +40,6 @@
       <button type="submit" value="cancel" name="cancel">Do Nothing</button>
     </form>
   </div>
+  <script src="../../../js/main.js"></script>
 </body>
 </html>

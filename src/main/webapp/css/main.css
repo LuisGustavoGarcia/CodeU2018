@@ -30,7 +30,8 @@ body {
 }
 
 h1 {
-  color: #757575;
+  color: #E65100;
+  font-family: sans-serif;
 }
 
 input {
@@ -87,9 +88,22 @@ button {
     transition: 0.3s;
 }
 
-.icon:hover {
-  height: 20px;
-  width: 20px;
+hr {
+    overflow: visible; /* For IE */
+    padding: 0;
+    border: none;
+    border-top: medium double #333;
+    color: #333;
+    text-align: center;
+}
+
+hr:after {
+    display: inline-block;
+    position: relative;
+    top: -0.7em;
+    font-size: 1.5em;
+    padding: 0 0.25em;
+    background: white;
 }
 
 /* Position and style the close button (top right corner) */

@@ -101,5 +101,6 @@ String sessionUser = (String) request.getSession().getAttribute("user");
     </hr>
 
   </div>
+  <script src="../../../js/main.js"></script>
 </body>
 </html>
