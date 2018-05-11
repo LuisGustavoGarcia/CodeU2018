@@ -23,7 +23,7 @@ function getMessage(){
 
 // Set the width of the side navigation to 250px
 function openNav() {
-    document.getElementById("mySidenav").style.width = "110px";
+    document.getElementById("mySidenav").style.width = "100px";
 }
 
 // Set the width of the side navigation to 0

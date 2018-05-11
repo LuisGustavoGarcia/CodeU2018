@@ -17,6 +17,9 @@
 #editorButtonArea {
   background-color: white;
   padding-top: 2px;
+  -webkit-box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
+  -moz-box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
+  box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
 }
 
 #pInput {
@@ -24,21 +27,27 @@
   border: solid black 1px;
   background-color: white;
   color: black;
+  -webkit-box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
+  -moz-box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
+  box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
 }
 
 #submitButton {
-  background-color: white;
-  border: none;
-  margin-left: none;
-  float: left;
+  color: white;
+  background: #E65100;
+  border: solid #FF6D00 1px;
+  margin-top: 0px;
+  width: 100%;
+  -webkit-box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
+  -moz-box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
+  box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
 }
 
 #chat {
   background-color: white;
-  height: 500px;
+  height: 80vh;
   overflow-y: scroll
-}
-
-#container {
-  margin-top: 0px;
+  -webkit-box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
+  -moz-box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
+  box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
 }

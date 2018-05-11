@@ -23,10 +23,13 @@
 
   <div id="mySidenav" class="sidenav">
    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-   <a href="/index.jsp"><img src="../../../assets/home.png"></img></a>
-   <a href="/conversations"><img src="../../../assets/conversations.png"></img></a>
-   <a href="/about.jsp"><img src="../../../assets/about.png"></img></a>
- </div>
+   <a href="/index.jsp"><img class="menuImage" src="../../../assets/home.png"></img></a>
+   <p class="menuText">Home</p>
+   <a href="/conversations"><img class="menuImage" src="../../../assets/conversations.png"></img></a>
+   <p class="menuText">Conversations</p>
+   <a href="/about.jsp"><img class="menuImage" src="../../../assets/about.png"></img></a>
+   <p class="menuText">The Team</p>
+  </div>
 
  <button id="navButton" onclick="openNav()"><img src="../../../assets/menu.png"</img></button>
 
