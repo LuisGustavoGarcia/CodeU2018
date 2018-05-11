@@ -51,7 +51,6 @@
             <input type="text" name="conversationTitle">
             <button type="submit">Create</button>
           </div>
-
       </form>
 
       <hr/>
@@ -62,11 +61,10 @@
 
     <form action="/conversations" method="POST">
       <div class="form-group">
-        <label class="form-control-label">Search:</label>
+        <label class="form-control-label"><strong>Search:</strong></label>
         <input type="text" name="searchTitle">
+        <button type="submit">Search</button>
       </div>
-
-      <button type="submit">Search</button>
     </form>
 
 
