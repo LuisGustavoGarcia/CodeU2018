@@ -57,7 +57,7 @@
     <% } %>
 
 
-    <h1>Queried Conversations</h1>
+    <h1>Search Conversations</h1>
 
     <form action="/conversations" method="POST">
       <div class="form-group">
@@ -80,8 +80,37 @@
           <p> No such convo. </p>
     <% } else { %>
         <ul class="mdl-list">
-        <li><a href="/chat/<%= request.getAttribute("searchTag") %>">
-          <%= request.getAttribute("searchTag") %></a></li>
+
+          <li><a href="/chat/<%= request.getAttribute("searchTag") %>">
+           <%= request.getAttribute("searchTag") %></a></li>
+
+          <%-- <li><a href="/chat/<%= request.getAttribute("searchTag") %>">
+            <%= request.getAttribute("searchTag") %></a></li>
+
+            <%
+            List<String> searched = request.getAttribute("searchTag");
+              for(String conversation : searched) { %>
+
+              <li><a href="/chat/<%= conversation %>">
+                <%= conversation %></a></li>
+
+            <%
+              }
+            %> --%>
+
+
+
+          <%-- <%
+          if(conversations != null && !conversations.isEmpty()){
+            for(Conversation conversation : conversations){
+              System.out.print(request.getAttribute("searchTag").toString());
+              if(conversation.getTitle().startsWith(request.getAttribute("searchTag").toString())) {
+          %>
+            <li><a href="/chat/<%= conversation.getTitle() %>">
+              <%= conversation.getTitle() %></a></li>
+          <%
+        } } }
+          %> --%>
         </ul>
     <% } } %>
 

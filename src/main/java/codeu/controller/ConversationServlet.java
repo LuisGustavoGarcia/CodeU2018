@@ -21,6 +21,7 @@ import codeu.model.store.basic.UserStore;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -103,6 +104,23 @@ public class ConversationServlet extends HttpServlet {
     String conversationTitle = request.getParameter("conversationTitle");
 
     if(searchTitle != null) {
+      // List<String> searched = new ArrayList<String>();
+      // List<Conversation> conversations = conversationStore.getAllConversations();
+      //
+      // for(Conversation conversation : conversations) {
+      //   if(conversation.getTitle().startsWith(searchTitle)) {
+      //     searched.add(conversation.getTitle());
+      //   }
+      // }
+      //
+      // if(searched != null || !searched.isEmpty()) {
+      //   request.setAttribute("searchTag", searched);
+      //   request.getRequestDispatcher("/WEB-INF/view/conversations.jsp").forward(request, response);
+      //   return;
+      // }
+
+
+
       if(conversationStore.getConversationWithTitle(searchTitle) != null) {
         request.setAttribute("searchTag", searchTitle);
         request.getRequestDispatcher("/WEB-INF/view/conversations.jsp").forward(request, response);
