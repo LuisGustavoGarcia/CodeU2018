@@ -57,11 +57,69 @@
       <hr/>
     <% } %>
 
-    <h1>Conversations</h1>
+
+    <h1>Search Conversations</h1>
+
+    <form action="/conversations" method="POST">
+      <div class="form-group">
+        <label class="form-control-label">Search:</label>
+        <input type="text" name="searchTitle">
+      </div>
+
+      <button type="submit">Search</button>
+    </form>
+
+
 
     <%
     List<Conversation> conversations =
       (List<Conversation>) request.getAttribute("conversations");
+    %>
+
+    <% if(request.getAttribute("searchTag") != null) {
+        if(request.getAttribute("searchTag").equals("No such convo.")) {%>
+          <p> No such convo. </p>
+    <% } else { %>
+        <ul class="mdl-list">
+
+          <li><a href="/chat/<%= request.getAttribute("searchTag") %>">
+           <%= request.getAttribute("searchTag") %></a></li>
+
+          <%-- <li><a href="/chat/<%= request.getAttribute("searchTag") %>">
+            <%= request.getAttribute("searchTag") %></a></li>
+
+            <%
+            List<String> searched = request.getAttribute("searchTag");
+              for(String conversation : searched) { %>
+
+              <li><a href="/chat/<%= conversation %>">
+                <%= conversation %></a></li>
+
+            <%
+              }
+            %> --%>
+
+
+
+          <%-- <%
+          if(conversations != null && !conversations.isEmpty()){
+            for(Conversation conversation : conversations){
+              System.out.print(request.getAttribute("searchTag").toString());
+              if(conversation.getTitle().startsWith(request.getAttribute("searchTag").toString())) {
+          %>
+            <li><a href="/chat/<%= conversation.getTitle() %>">
+              <%= conversation.getTitle() %></a></li>
+          <%
+        } } }
+          %> --%>
+        </ul>
+    <% } } %>
+
+    <hr/>
+
+    <h1>All Conversations</h1>
+    <%
+
     if(conversations == null || conversations.isEmpty()){
     %>
       <p>Create a conversation to get started.</p>
