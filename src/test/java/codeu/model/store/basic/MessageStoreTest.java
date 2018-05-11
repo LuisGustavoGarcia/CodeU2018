@@ -17,7 +17,7 @@ public class MessageStoreTest {
   private MessageStore messageStore;
   private PersistentStorageAgent mockPersistentStorageAgent;
 
-  private final UUID CONVERSATION_ID_ONE = UUID.randomUUID();
+  private final UUID CONVERSATION_ID_ONE = UUID.randomUUID(); 
   private final Message MESSAGE_ONE =
       new Message(
           UUID.randomUUID(),
@@ -26,22 +26,47 @@ public class MessageStoreTest {
           "message one",
           Instant.ofEpochMilli(1000), 
           UUID.randomUUID());
+  UUID rand = UUID.randomUUID(); 
   private final Message MESSAGE_TWO =
       new Message(
-          UUID.randomUUID(),
+          rand, 
           CONVERSATION_ID_ONE,
           UUID.randomUUID(),
           "message two",
           Instant.ofEpochMilli(2000), 
-          UUID.randomUUID());
+          rand); 
   private final Message MESSAGE_THREE =
       new Message(
           UUID.randomUUID(),
-          UUID.randomUUID(),
+          UUID.randomUUID(), 
           UUID.randomUUID(),
           "message three",
           Instant.ofEpochMilli(3000), 
           UUID.randomUUID());
+  private final Message MESSAGE_TWO_REPLY1 =
+	      new Message(
+	          UUID.randomUUID(),
+	          CONVERSATION_ID_ONE,
+	          UUID.randomUUID(),
+	          "message two reply1", 
+	          Instant.ofEpochMilli(3000), 
+	          rand); 
+  private final Message MESSAGE_TWO_REPLY2 =
+	      new Message(
+	          UUID.randomUUID(),
+	          CONVERSATION_ID_ONE,
+	          UUID.randomUUID(),
+	          "message two reply2", 
+	          Instant.ofEpochMilli(3000), 
+	          rand); 
+  private final Message MESSAGE_FOUR =
+	      new Message(
+	          UUID.randomUUID(),
+	          CONVERSATION_ID_ONE,  
+	          UUID.randomUUID(),
+	          "message four",
+	          Instant.ofEpochMilli(3000), 
+	          UUID.randomUUID());
 
   @Before
   public void setup() {
@@ -61,11 +86,42 @@ public class MessageStoreTest {
 
     Assert.assertEquals(2, resultMessages.size());
     assertEquals(MESSAGE_ONE, resultMessages.get(0));
-    assertEquals(MESSAGE_TWO, resultMessages.get(1));
-  }
+    assertEquals(MESSAGE_TWO, resultMessages.get(1)); 
+  } 
+  
+  @Test 
+  public void testSortGetMessages() { 
+	  Message messageThree = 
+		      new Message(
+		          UUID.randomUUID(),
+		          CONVERSATION_ID_ONE, 
+		          UUID.randomUUID(),
+		          "message three",
+		          Instant.ofEpochMilli(3000), 
+		          UUID.randomUUID()); 
+	  
+	  List<Message> messages = new ArrayList<Message>(); 
+	  messages.add(MESSAGE_ONE);
+	  messages.add(MESSAGE_TWO);
+	  messages.add(messageThree); 
+	  messages.add(MESSAGE_TWO_REPLY1); 
+	  messages.add(MESSAGE_FOUR); 
+	  messages.add(MESSAGE_TWO_REPLY2); 
+	  messageStore.setMessages(messages);  
+	  
+	  List<Message> resultMessages = messageStore.getMessagesInConversation(CONVERSATION_ID_ONE); 
+
+	  Assert.assertEquals(6, resultMessages.size());
+	  assertEquals(MESSAGE_ONE, resultMessages.get(0));
+	  assertEquals(MESSAGE_TWO, resultMessages.get(1));
+	  assertEquals(MESSAGE_TWO_REPLY1, resultMessages.get(2));
+	  assertEquals(MESSAGE_TWO_REPLY2, resultMessages.get(3)); 
+	  assertEquals(messageThree, resultMessages.get(4)); 
+	  assertEquals(MESSAGE_FOUR, resultMessages.get(5)); 
+  } 
 
   @Test
-  public void testAddMessage() {
+  public void testAddMessage() { 
     UUID inputConversationId = UUID.randomUUID();
     Message inputMessage =
         new Message(

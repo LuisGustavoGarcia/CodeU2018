@@ -139,21 +139,20 @@ public class ChatServlet extends HttpServlet {
     }
 
     String messageContent = request.getParameter("message");
-    String groupID = request.getParameter("reply"); 
+    String groupID = request.getParameter("replyID"); 
 
     // this removes any HTML from the message content
     String cleanedMessageContent = Jsoup.clean(messageContent, Whitelist.relaxed());
 
     UUID messageId = UUID.randomUUID(); 
     UUID groupId = messageId; 
-    if (!groupID.equals("reply")) { 
+    if (!groupID.equals("")) {  // if "reply" was clicked 
     	groupId = UUID.fromString(groupID); 
+    	//System.out.println("MESSAGE: "+ cleanedMessageContent); 
+    	cleanedMessageContent = "\t" + cleanedMessageContent; 
+    	//System.out.println("MESSAGE2: "+ cleanedMessageContent); 
     } 
-    ///////////
-    if(messageId.equals(groupId)) { 
-    	System.out.println("SAME");
-    }
-    else { System.out.println("DIFF"); } 
+
     Message message =
         new Message(
             messageId,
@@ -164,6 +163,7 @@ public class ChatServlet extends HttpServlet {
         	groupId); 
 
     messageStore.addMessage(message);
+    System.out.println(message.getContent()); 
 
     // redirect to a GET request
     response.sendRedirect("/chat/" + conversationTitle);

@@ -142,7 +142,7 @@ public class MessageStore {
   class GroupIdComparator implements Comparator<Message> {
 	    @Override 
 	    public int compare(Message a, Message b) { 
-	    	if(a.getGroupID() == b.getGroupID()) { 
+	    	if(a.getGroupID().equals(b.getGroupID())) { 
 	    		return a.getCreationTime().compareTo(b.getCreationTime()); 
 	    	} else { 
 	    		Message firstMessageA = groupIDtoMessages.get(a.getGroupID()).get(0); 

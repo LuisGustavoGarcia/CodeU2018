@@ -64,7 +64,8 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <h1><%= conversation.getTitle() %>
       <a href="" style="float: right">&#8635;</a></h1>
 
-    <hr/>
+    <hr/> 
+
 	
     <div id="chat">
       <ul>
@@ -73,21 +74,15 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
         Message message = messages.get(i); 
         String author = UserStore.getInstance()
           .getUser(message.getAuthorId()).getName();
-    %>
-      <li><strong><a href="/users/<%= author %>"><%= author %></a>:</strong> <%= message.getContent() %></li>
+    %> 
+      <li style="list-style-type:none"><strong><a href="/users/<%= author %>"><%= author %></a>:</strong> <%= message.getContent() %></li> 
         <% 
         if (i == (messages.size()-1) || !(messages.get(i+1).getGroupID().equals(messages.get(i).getGroupID()))) { 
-           out.println("GROUP ID: " + messages.get(i).getGroupID()); 
-           if (i < messages.size()-1) {
-           out.println("other GROUP ID: " + messages.get(i+1).getGroupID()); 
-           } 
         %> 
-        
-        <button id="respondButton" type="submit" onclick="setGroupID('<%= message.getGroupID()%>')">Reply to Message</button> 
-        
+        <button id="respondButton" type="submit" onclick="onReplyClick('<%= message.getGroupID()%>')">Reply to Message</button>  
     <% 
         } 
-      }
+      } 
     %>
       </ul>
     </div>
@@ -104,15 +99,16 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
 
     <form action="/chat/<%= conversation.getTitle() %>" method="POST">
       <div>
-        <p id="pInput" class="editor" title="Enter your message."></p>
-        <button id="submitButton" type="submit" onclick="getMessage()">Send</button>
+        <p id="pInput" class="editor" title="Enter your message."></p> 
+        <button id="submitButton" type="submit" onclick="getMessage()">Send</button> 
       </div>
       <br/>
       <input type="hidden" value="message" name="message" id="hiddenInput" />
-      <input type="hidden" value="reply" name="reply" id="hiddenReply" /> 
-    </form>
+      <input type="hidden" value="" name="replyID" id="hiddenReply" /> 
+    </form>  
+
     <% } else { %>
-      <p><a href="/login">Login</a> to send a message.</p>
+      <p><a href="/login">Login</a> to send a message.</p> 
     <% } %>
 
     <hr/>

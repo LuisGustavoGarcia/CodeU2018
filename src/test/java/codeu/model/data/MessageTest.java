@@ -37,5 +37,6 @@ public class MessageTest {
     Assert.assertEquals(author, message.getAuthorId());
     Assert.assertEquals(content, message.getContent());
     Assert.assertEquals(creation, message.getCreationTime());
+    Assert.assertEquals(groupID, message.getGroupID()); 
   }
 }
