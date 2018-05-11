@@ -24,17 +24,18 @@
 </head>
 <body>
 
-  <nav>
-   <a id="navTitle" href="/">CodeU Chat App</a>
-   <a href="/conversations">Conversations</a>
-   <% if(request.getSession().getAttribute("user") != null){ %>
-     <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
-   <% } else{ %>
-     <a href="/login">Login</a>
-     <a href="/register">Register</a>
-   <% } %>
-   <a href="/about.jsp">About</a>
- </nav>
+   <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="/index.jsp"><img class="menuImage" src="../../../assets/home.png"></img></a>
+    <p class="menuText">Home</p>
+    <a href="/conversations"><img class="menuImage" src="../../../assets/conversations.png"></img></a>
+    <p class="menuText">Conversations</p>
+    <a href="/about.jsp"><img class="menuImage" src="../../../assets/about.png"></img></a>
+    <p class="menuText">The Team</p>
+  </div>
+
+  <button id="navButton" onclick="openNav()"><img src="../../../assets/menu.png"</img></button>
+
 
   <div id="container">
 
@@ -43,14 +44,13 @@
     <% } %>
 
     <% if(request.getSession().getAttribute("user") != null){ %>
-      <h1>New Conversation</h1>
+      <h1>Create A New Conversation</h1>
       <form action="/conversations" method="POST">
           <div class="form-group">
-            <label class="form-control-label">Title:</label>
-          <input type="text" name="conversationTitle">
-        </div>
-
-        <button type="submit">Create</button>
+            <label class="form-control-label"><strong>Title:</strong></label>
+            <input type="text" name="conversationTitle">
+            <button type="submit">Create</button>
+          </div>
       </form>
 
       <hr/>
@@ -61,11 +61,10 @@
 
     <form action="/conversations" method="POST">
       <div class="form-group">
-        <label class="form-control-label">Search:</label>
+        <label class="form-control-label"><strong>Search:</strong></label>
         <input type="text" name="searchTitle">
+        <button type="submit">Search</button>
       </div>
-
-      <button type="submit">Search</button>
     </form>
 
 
@@ -141,5 +140,6 @@
     %>
     <hr/>
   </div>
+  <script src="../../../js/main.js"></script>
 </body>
 </html>

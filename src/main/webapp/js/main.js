@@ -4,8 +4,8 @@ const editor = document.querySelector('.editor');
 editor.contentEditable = true;
 editor.focus();
 
-//This function is responsible for editing the text using a command passed to it
-//and the Browser execCommand functionality.
+// This function is responsible for editing the text using a command passed to it
+// and the Browser execCommand functionality.
 function command(name){
   try{
     var success = document.execCommand(name, false, null);
@@ -19,4 +19,14 @@ function getMessage(){
   var message = elem.innerHTML;
   elem = document.getElementById('hiddenInput');
   elem.setAttribute("value", message);
+}
+
+// Set the width of the side navigation to 250px
+function openNav() {
+    document.getElementById("mySidenav").style.width = "100px";
+}
+
+// Set the width of the side navigation to 0
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
 }
