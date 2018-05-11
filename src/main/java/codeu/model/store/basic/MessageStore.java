@@ -100,11 +100,8 @@ public class MessageStore {
       if (message.getConversationId().equals(conversationId)) {
         messagesInConversation.add(message);
       }
-    }
-    
-    System.out.println("Num messages = " + messagesInConversation.size()); 
-    
-    System.out.println("num. of messages = " + messages.size()); 
+    } 
+
     //creating a HashMap for each message to have their related group IDs 
     groupIDtoMessages = new HashMap<>(); 
     for(Message message:messages) { 
@@ -148,7 +145,6 @@ public class MessageStore {
 	    	if(a.getGroupID() == b.getGroupID()) { 
 	    		return a.getCreationTime().compareTo(b.getCreationTime()); 
 	    	} else { 
-	    		System.out.println("message = " + a.getContent());
 	    		Message firstMessageA = groupIDtoMessages.get(a.getGroupID()).get(0); 
 	    		Message firstMessageB = groupIDtoMessages.get(b.getGroupID()).get(0); 
 	    		return firstMessageA.getCreationTime().compareTo(firstMessageB.getCreationTime()); 

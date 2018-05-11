@@ -139,19 +139,29 @@ public class ChatServlet extends HttpServlet {
     }
 
     String messageContent = request.getParameter("message");
+    String groupID = request.getParameter("reply"); 
 
     // this removes any HTML from the message content
     String cleanedMessageContent = Jsoup.clean(messageContent, Whitelist.relaxed());
 
+    UUID messageId = UUID.randomUUID(); 
+    UUID groupId = messageId; 
+    if (!groupID.equals("reply")) { 
+    	groupId = UUID.fromString(groupID); 
+    } 
+    ///////////
+    if(messageId.equals(groupId)) { 
+    	System.out.println("SAME");
+    }
+    else { System.out.println("DIFF"); } 
     Message message =
         new Message(
-            UUID.randomUUID(),
+            messageId,
             conversation.getId(),
             user.getId(),
             cleanedMessageContent,
             Instant.now(),
-        	UUID.randomUUID()); 
-    //TODO: (Jean) sometimes we don't want a random group ID 
+        	groupId); 
 
     messageStore.addMessage(message);
 

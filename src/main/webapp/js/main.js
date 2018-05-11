@@ -20,3 +20,13 @@ function getMessage(){
   elem = document.getElementById('hiddenInput');
   elem.setAttribute("value", message);
 }
+
+function setGroupID(groupID){ 
+  var elem2 = document.getElementById('hiddenReply'); 
+  elem2.setAttribute("value", groupID); 
+  console.log("GETS HERE"); 
+} 
+
+
+
+
