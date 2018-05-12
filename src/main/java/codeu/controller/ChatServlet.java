@@ -160,7 +160,7 @@ public class ChatServlet extends HttpServlet {
             user.getId(),
             cleanedMessageContent,
             Instant.now(),
-        	groupId);
+        	  groupId); 
 
     messageStore.addMessage(message);
     System.out.println(message.getContent());

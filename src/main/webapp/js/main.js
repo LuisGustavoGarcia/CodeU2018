@@ -16,14 +16,18 @@ function command(name){
 
 function getMessage(){
   var elem = document.getElementById('pInput');
-  var message = elem.innerHTML;
+  var message = elem.innerHTML; 
   elem = document.getElementById('hiddenInput');
   elem.setAttribute("value", message);
-}
+} 
 
-function onReplyClick(groupID){
-  alert("Type reply below.");
+function onReplyClick(groupID){ 
+  alert("Type reply below.");        
   document.getElementById("pInput").focus();
-  var elem2 = document.getElementById('hiddenReply');
-  elem2.setAttribute("value", groupID);
-}
+  var elem2 = document.getElementById('hiddenReply'); 
+  elem2.setAttribute("value", groupID); 
+} 
+
+
+
+
