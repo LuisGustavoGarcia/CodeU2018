@@ -22,7 +22,6 @@ import codeu.model.store.basic.MessageStore;
 import codeu.model.store.basic.UserStore;
 import java.io.IOException;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import javax.servlet.ServletException;
@@ -144,43 +143,7 @@ public class ChatServlet extends HttpServlet {
 
     // this removes any HTML from the message content
     String cleanedMessageContent = Jsoup.clean(messageContent, Whitelist.relaxed());
-    
-    String keyword = "@";
-    List<Integer> nameIndexes = new ArrayList<>();
-    List<String> mentions = new ArrayList<>();
-    
-	int index = cleanedMessageContent.indexOf(keyword);
-	if (cleanedMessageContent.length() > 1) {
-		while (index >=0){
-			nameIndexes.add(index);
-			index = cleanedMessageContent.indexOf(keyword, index+keyword.length());
-		}
-	}
-	
-	// get all the names mentioned after '@'; 
-	for (int i = 0; i < nameIndexes.size(); i++) {
-	    int firstLetter = nameIndexes.get(i) + 1;
-	    String name = cleanedMessageContent.substring(firstLetter);
-	    int endIndex = name.indexOf(' ');
-	    int currIndex = 0;
-	    while (Character.isDigit(name.charAt(currIndex)) || Character.isLetter(name.charAt(currIndex))) {
-	    		currIndex++;
-	    	 	if (currIndex >= name.length()) break;	
-	    }
-	    endIndex = currIndex; 
-	    
-	    name = name.substring(0, endIndex);
-	    if (userStore.getUser(name) != null) {
-	    	cleanedMessageContent = cleanedMessageContent.substring(0, firstLetter-1) 
-	    							+ "<b>@" + name + "</b>" 
-	    							+ cleanedMessageContent.substring(firstLetter+name.length());
-	    	if (i+1 < nameIndexes.size()) {
-	    		nameIndexes.set(i+1,nameIndexes.get(i+1) + 7);
-	    	}
-	    }
-	    mentions.add(name);
-	  }
-	
+
     UUID messageId = UUID.randomUUID(); 
     UUID groupId = messageId; 
     if (!groupID.equals("")) {  // if "reply" was clicked 
@@ -189,25 +152,19 @@ public class ChatServlet extends HttpServlet {
     	cleanedMessageContent = "\t" + cleanedMessageContent; 
     	//System.out.println("MESSAGE2: "+ cleanedMessageContent); 
     } 
-	
+
     Message message =
-            new Message(
-                messageId,
-                conversation.getId(),
-                user.getId(),
-                cleanedMessageContent,
-                Instant.now(),
-                groupId);
+        new Message(
+            messageId,
+            conversation.getId(),
+            user.getId(),
+            cleanedMessageContent,
+            Instant.now(),
+        	groupId); 
 
-        messageStore.addMessage(message);
+    messageStore.addMessage(message);
+    System.out.println(message.getContent()); 
 
-    	for (String usernameMentioned : mentions) {
-    	    if (userStore.isUserRegistered(usernameMentioned)) {
-    	    		User userMentioned = userStore.getUser(usernameMentioned);
-    	    		userMentioned.addMention(message, conversation);
-    	    		userStore.addUser(userMentioned);
-    	    }
-    	}
     // redirect to a GET request
     response.sendRedirect("/chat/" + conversationTitle);
   }

@@ -14,40 +14,16 @@
   width: 20px;
 }
 
-#editorButtonArea {
-  background-color: white;
-  padding-top: 2px;
-  -webkit-box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
-  -moz-box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
-  box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
-}
-
 #pInput {
   margin-top: 0;
   border: solid black 1px;
   background-color: white;
   color: black;
-  -webkit-box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
-  -moz-box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
-  box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
 }
 
 #submitButton {
-  color: white;
-  background: #E65100;
-  border: solid #FF6D00 1px;
-  margin-top: 0px;
-  width: 100%;
-  -webkit-box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
-  -moz-box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
-  box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
-}
-
-#chat {
   background-color: white;
-  height: 80vh;
-  overflow-y: scroll
-  -webkit-box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
-  -moz-box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
-  box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
+  border: none;
+  margin-left: none;
+  float: left;
 }
