@@ -25,6 +25,7 @@ import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -63,10 +64,12 @@ public class PersistentDataStore {
     for (Entity entity : results.asIterable()) {
       try {
         UUID uuid = UUID.fromString((String) entity.getProperty("uuid"));
-        String userName = (String) entity.getProperty("username"); 
-        String password = (String)entity.getProperty("password"); 	// Jean added this line (part 2) 
+        String userName = (String) entity.getProperty("username");
+        String aboutMe = (String) entity.getProperty("aboutMe"); // Lina added this line (project 2)
+        String password = (String)entity.getProperty("password"); 	// Jean added this line (part 2)
         Instant creationTime = Instant.parse((String) entity.getProperty("creation_time"));
-        User user = new User(uuid, userName, password, creationTime);	//Jean added password parameter 
+        User user = new User(uuid, userName, password, creationTime);	//Jean added password parameter
+        user.setAboutMe(aboutMe); // Lina added this line (project 2)
         users.add(user);
       } catch (Exception e) {
         // In a production environment, errors should be very rare. Errors which may
@@ -76,6 +79,7 @@ public class PersistentDataStore {
       }
     }
 
+    Collections.sort(users, (u1, u2) -> u1.getCreationTime().compareTo(u2.getCreationTime()));
     return users;
   }
 
@@ -133,7 +137,8 @@ public class PersistentDataStore {
         UUID authorUuid = UUID.fromString((String) entity.getProperty("author_uuid"));
         Instant creationTime = Instant.parse((String) entity.getProperty("creation_time"));
         String content = (String) entity.getProperty("content");
-        Message message = new Message(uuid, conversationUuid, authorUuid, content, creationTime);
+        UUID groupID = UUID.fromString((String) entity.getProperty("groupID"));
+        Message message = new Message(uuid, conversationUuid, authorUuid, content, creationTime, groupID);
         messages.add(message);
       } catch (Exception e) {
         // In a production environment, errors should be very rare. Errors which may
@@ -148,11 +153,13 @@ public class PersistentDataStore {
 
   /** Write a User object to the Datastore service. */
   public void writeThrough(User user) {
-    Entity userEntity = new Entity("chat-users");
+	//updated by Lina so users can be accessed by id in datastore
+    Entity userEntity = new Entity("chat-users", user.getId().toString());
     userEntity.setProperty("uuid", user.getId().toString());
-    userEntity.setProperty("username", user.getName()); 
-    userEntity.setProperty("password", user.getPassword()); 	//Jean added this line 
+    userEntity.setProperty("username", user.getName());
+    userEntity.setProperty("password", user.getPassword()); 	//Jean added this line
     userEntity.setProperty("creation_time", user.getCreationTime().toString());
+    userEntity.setProperty("aboutMe", user.getAboutMe()); // Lina added this line (project 2)
     datastore.put(userEntity);
   }
 
@@ -164,6 +171,7 @@ public class PersistentDataStore {
     messageEntity.setProperty("author_uuid", message.getAuthorId().toString());
     messageEntity.setProperty("content", message.getContent());
     messageEntity.setProperty("creation_time", message.getCreationTime().toString());
+    messageEntity.setProperty("groupID", message.getGroupID().toString());
     datastore.put(messageEntity);
   }
 

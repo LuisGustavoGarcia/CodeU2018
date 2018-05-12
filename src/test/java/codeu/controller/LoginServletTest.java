@@ -42,7 +42,7 @@ public class LoginServletTest {
     mockRequest = Mockito.mock(HttpServletRequest.class);
     mockResponse = Mockito.mock(HttpServletResponse.class);
     mockRequestDispatcher = Mockito.mock(RequestDispatcher.class);
-    Mockito.when(mockRequest.getRequestDispatcher("/WEB-INF/view/login.jsp"))
+    Mockito.when(mockRequest.getRequestDispatcher("/index.jsp"))
         .thenReturn(mockRequestDispatcher);
   }
 

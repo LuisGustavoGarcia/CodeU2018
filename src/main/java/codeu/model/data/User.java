@@ -15,6 +15,10 @@
 package codeu.model.data;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 /** Class representing a registered user. */
@@ -23,6 +27,8 @@ public class User {
   private final String name;
   private final String hashedPassword; 	// Jean added this for part 2; Luis renamed this variable for part 9
   private final Instant creation; 
+  private String aboutMe; // this String holds the information to be used in the "About Me" section (Lina)
+  private Map<Conversation, List<Message>> mentions;
 
   /**
    * Constructs a new User.
@@ -37,6 +43,8 @@ public class User {
     this.name = name;
     this.hashedPassword = password; 		//Jean added password to constructor; Luis renamed this variable for part 9
     this.creation = creation;
+    this.aboutMe = "No profile information yet!"; // added by Lina (Project 2)
+    this.mentions = new HashMap<>();
   }
 
   /** Returns the ID of this User. */
@@ -57,5 +65,26 @@ public class User {
   /** Returns the creation time of this User. */
   public Instant getCreationTime() {
     return creation;
+  }
+  
+  /** Sets the aboutMe String of the User. */
+  public void setAboutMe(String aboutMe) { // added by Lina (Project 2)
+	  this.aboutMe = aboutMe; 
+  }
+  
+  /** Returns the About Me information of this User */
+  public String getAboutMe() { // added by Lina (Project 2)
+	  return aboutMe; 
+  }
+  
+  public void addMention(Message message, Conversation conversation) {
+	  if (!this.mentions.containsKey(conversation)) {
+		  this.mentions.put(conversation, new ArrayList<Message>());
+	  }
+	  this.mentions.get(conversation).add(message);
+  }
+  
+  public Map<Conversation, List<Message>> getMentions() {
+	  return this.mentions;
   }
 }

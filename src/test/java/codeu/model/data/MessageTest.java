@@ -28,8 +28,9 @@ public class MessageTest {
     UUID author = UUID.randomUUID();
     String content = "test content";
     Instant creation = Instant.now();
+    UUID groupID = UUID.randomUUID(); 
 
-    Message message = new Message(id, conversation, author, content, creation);
+    Message message = new Message(id, conversation, author, content, creation, groupID);
 
     Assert.assertEquals(id, message.getId());
     Assert.assertEquals(conversation, message.getConversationId());

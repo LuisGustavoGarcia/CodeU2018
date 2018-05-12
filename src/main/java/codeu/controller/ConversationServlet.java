@@ -21,6 +21,7 @@ import codeu.model.store.basic.UserStore;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.UUID;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -99,24 +100,57 @@ public class ConversationServlet extends HttpServlet {
       return;
     }
 
+    String searchTitle = request.getParameter("searchTitle");
     String conversationTitle = request.getParameter("conversationTitle");
-    if (!conversationTitle.matches("[\\w*]*")) {
-      request.setAttribute("error", "Please enter only letters and numbers.");
+
+    if(searchTitle != null) {
+      // List<String> searched = new ArrayList<String>();
+      // List<Conversation> conversations = conversationStore.getAllConversations();
+      //
+      // for(Conversation conversation : conversations) {
+      //   if(conversation.getTitle().startsWith(searchTitle)) {
+      //     searched.add(conversation.getTitle());
+      //   }
+      // }
+      //
+      // if(searched != null || !searched.isEmpty()) {
+      //   request.setAttribute("searchTag", searched);
+      //   request.getRequestDispatcher("/WEB-INF/view/conversations.jsp").forward(request, response);
+      //   return;
+      // }
+
+
+
+      if(conversationStore.getConversationWithTitle(searchTitle) != null) {
+        request.setAttribute("searchTag", searchTitle);
+        request.getRequestDispatcher("/WEB-INF/view/conversations.jsp").forward(request, response);
+        return;
+      }
+      request.setAttribute("searchTag", "No such convo.");
       request.getRequestDispatcher("/WEB-INF/view/conversations.jsp").forward(request, response);
       return;
+      // response.sendRedirect("/conversations");
     }
+    else if(conversationTitle != null) {
+      if (!conversationTitle.matches("[\\w*]*")) {
+        request.setAttribute("error", "Please enter only letters and numbers.");
+        request.getRequestDispatcher("/WEB-INF/view/conversations.jsp").forward(request, response);
+        return;
+      }
 
-    if (conversationStore.isTitleTaken(conversationTitle)) {
-      // conversation title is already taken, just go into that conversation instead of creating a
-      // new one
+      if (conversationStore.isTitleTaken(conversationTitle)) {
+        // conversation title is already taken, just go into that conversation instead of creating a
+        // new one
+        response.sendRedirect("/chat/" + conversationTitle);
+        return;
+      }
+
+      Conversation conversation =
+          new Conversation(UUID.randomUUID(), user.getId(), conversationTitle, Instant.now());
+
+      conversationStore.addConversation(conversation);
       response.sendRedirect("/chat/" + conversationTitle);
-      return;
     }
 
-    Conversation conversation =
-        new Conversation(UUID.randomUUID(), user.getId(), conversationTitle, Instant.now());
-
-    conversationStore.addConversation(conversation);
-    response.sendRedirect("/chat/" + conversationTitle);
   }
 }
