@@ -148,16 +148,18 @@ public class PersistentDataStoreTest {
     UUID authorOne = UUID.randomUUID();
     String contentOne = "test content one";
     Instant creationOne = Instant.ofEpochMilli(1000);
+    UUID groupIDOne = UUID.randomUUID();
     Message inputMessageOne =
-        new Message(idOne, conversationOne, authorOne, contentOne, creationOne);
+        new Message(idOne, conversationOne, authorOne, contentOne, creationOne, groupIDOne);
 
     UUID idTwo = UUID.randomUUID();
     UUID conversationTwo = UUID.randomUUID();
     UUID authorTwo = UUID.randomUUID();
     String contentTwo = "test content one";
     Instant creationTwo = Instant.ofEpochMilli(2000);
+    UUID groupIDTwo = UUID.randomUUID();
     Message inputMessageTwo =
-        new Message(idTwo, conversationTwo, authorTwo, contentTwo, creationTwo);
+        new Message(idTwo, conversationTwo, authorTwo, contentTwo, creationTwo, groupIDTwo); 
 
     // save
     persistentDataStore.writeThrough(inputMessageOne);

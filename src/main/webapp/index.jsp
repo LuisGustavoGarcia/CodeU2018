@@ -15,56 +15,42 @@
 --%>
 <!DOCTYPE html>
 <html>
-<meta name="viewport" content="width=device-width" />
 <head>
-  <title>Indie Ozone's Chat App</title>
+  <title>CodeU Chat App</title>
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="stylesheet" href="/css/index.css">
-  <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
-  <script type="text/javascript" src="../js/jquery.transit.min.js"></script>
 </head>
-<body class="body" style="vertical-align: middle">
-  <div>
-    <div id="image_area">
-      <img id="earth" src="../assets/Earth.png"/>
-      <img id="clouds" src="../assets/Clouds.png"/>
-      <img id="satellite" src="../assets/Satellite.png"/>
-    </div>
+<body>
 
-    <div id="login_area">
-      <h1 id="welcome_title">Welcome</h1>
-      <button style="float: left" class="buttons" onclick="loginMode()">Existing User</button>
-      <button style="float: left" class="buttons" onclick="registerMode()">New User</button>
+  <nav>
+   <a id="navTitle" href="/">CodeU Chat App</a>
+   <a href="/conversations">Conversations</a>
+   <% if(request.getSession().getAttribute("user") != null){ %>
+     <a>Hello <%= request.getSession().getAttribute("user") %>!</a>
+            <a href="/about.jsp">About</a>
+   <% } else{ %>
+     <a href="/login">Login</a>
+     <a href="/register">Register</a>
+   <% } %>
 
-      <form id="login_form" action="/login" method="POST">
-        <label for="username">Username: </label>
-        <input type="text" name="username" id="username">
-        <br/>
-        <label for="password">Password: </label>
-        <input type="password" name="password" id="password">
-        <br/><br/>
-        <button style="border-radius: 5px" class="buttons" type="submit">Login</button>
-      </form>
+ </nav>
 
-      <form id="register_form" action="/register" method="POST">
-        <label for="username">Username: </label>
-        <input type="text" name="username" id="username">
-        <br/>
-        <label for="password">Password: </label>
-        <input type="password" name="password" id="password">
-        <br/><br/>
-        <button style="border-radius: 5px" class="buttons" type="submit">Register</button>
-      </form>
+  <div id="container">
+    <div
+      style="width:75%; margin-left:auto; margin-right:auto; margin-top: 50px;">
 
-      <% if(request.getAttribute("error") != null){ %>
-          <h2 id="login_error_msg"><%= request.getAttribute("error") %></h2>
-      <% } %>
+      <h1>CodeU Chat App</h1>
+      <h2>Welcome to Team 15's Chat App!! &#128526; &#128526;</h2>
+
+      <ul>
+        <li><a href="/login">Login</a> to get started.</li>
+        <li>Go to the <a href="/conversations">conversations</a> page to
+            create or join a conversation.</li>
+        <li>View the <a href="/about.jsp">about</a> page to learn more about the
+            project.</li>
+        <li>You can <a href="/testdata">load test data</a> to fill the site with
+            example data.</li>
+      </ul>
     </div>
   </div>
-
-  <script src="../../../js/index.js"></script>
-  <script type="text/javascript">
-    // TODO: Make clouds rotate, and satellite bounce around a bit.
-  </script>
 </body>
 </html>
