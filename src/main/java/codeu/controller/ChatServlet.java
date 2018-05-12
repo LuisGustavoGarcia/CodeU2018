@@ -139,19 +139,19 @@ public class ChatServlet extends HttpServlet {
     }
 
     String messageContent = request.getParameter("message");
-    String groupID = request.getParameter("replyID");
+    String groupID = request.getParameter("replyID"); 
 
     // this removes any HTML from the message content
     String cleanedMessageContent = Jsoup.clean(messageContent, Whitelist.relaxed());
 
-    UUID messageId = UUID.randomUUID();
-    UUID groupId = messageId;
-    if (!groupID.equals("")) {  // if "reply" was clicked
-    	groupId = UUID.fromString(groupID);
-    	//System.out.println("MESSAGE: "+ cleanedMessageContent);
-    	cleanedMessageContent = "\t" + cleanedMessageContent;
-    	//System.out.println("MESSAGE2: "+ cleanedMessageContent);
-    }
+    UUID messageId = UUID.randomUUID(); 
+    UUID groupId = messageId; 
+    if (!groupID.equals("")) {  // if "reply" was clicked 
+    	groupId = UUID.fromString(groupID); 
+    	//System.out.println("MESSAGE: "+ cleanedMessageContent); 
+    	cleanedMessageContent = "\t" + cleanedMessageContent; 
+    	//System.out.println("MESSAGE2: "+ cleanedMessageContent); 
+    } 
 
     Message message =
         new Message(
@@ -160,10 +160,10 @@ public class ChatServlet extends HttpServlet {
             user.getId(),
             cleanedMessageContent,
             Instant.now(),
-        	  groupId); 
+        	groupId); 
 
     messageStore.addMessage(message);
-    System.out.println(message.getContent());
+    System.out.println(message.getContent()); 
 
     // redirect to a GET request
     response.sendRedirect("/chat/" + conversationTitle);
