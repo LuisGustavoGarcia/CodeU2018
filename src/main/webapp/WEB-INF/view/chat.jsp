@@ -62,12 +62,18 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <div id="chat">
       <ul>
     <%
-      for (Message message : messages) {
+      for (int i = 0; i < messages.size(); i++){
+        Message message = messages.get(i);
         String author = UserStore.getInstance()
           .getUser(message.getAuthorId()).getName();
     %>
-      <li><strong><a href="/users/<%= author %>"><%= author %></a>:</strong> <%= message.getContent() %></li>
+      <li style="list-style-type:none"><strong><a href="/users/<%= author %>"><%= author %></a>:</strong> <%= message.getContent() %></li>
+        <%
+        if (i == (messages.size()-1) || !(messages.get(i+1).getGroupID().equals(messages.get(i).getGroupID()))) {
+        %>
+        <button id="respondButton" type="submit" onclick="onReplyClick('<%= message.getGroupID()%>')">Reply to Message</button>
     <%
+        }
       }
     %>
       </ul>
@@ -89,6 +95,7 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
       </div>
       <br/>
       <input type="hidden" value="message" name="message" id="hiddenInput" />
+      <input type="hidden" value="" name="replyID" id="hiddenReply" /> 
     </form>
     <% } else { %>
       <p><a href="/login">Login</a> to send a message.</p>

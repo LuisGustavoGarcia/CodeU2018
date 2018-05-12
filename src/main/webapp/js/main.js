@@ -21,6 +21,13 @@ function getMessage(){
   elem.setAttribute("value", message);
 }
 
+function onReplyClick(groupID){
+  alert("Type reply below.");
+  document.getElementById("pInput").focus();
+  var elem2 = document.getElementById('hiddenReply');
+  elem2.setAttribute("value", groupID);
+} 
+
 // Set the width of the side navigation to 250px
 function openNav() {
     document.getElementById("mySidenav").style.width = "100px";

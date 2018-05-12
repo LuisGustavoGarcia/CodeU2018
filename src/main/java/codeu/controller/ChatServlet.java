@@ -140,56 +140,67 @@ public class ChatServlet extends HttpServlet {
     }
 
     String messageContent = request.getParameter("message");
+    String groupID = request.getParameter("replyID");
 
     // this removes any HTML from the message content
     String cleanedMessageContent = Jsoup.clean(messageContent, Whitelist.relaxed());
-    
+
     String keyword = "@";
     List<Integer> nameIndexes = new ArrayList<>();
     List<String> mentions = new ArrayList<>();
-    
-	int index = cleanedMessageContent.indexOf(keyword);
-	if (cleanedMessageContent.length() > 1) {
-		while (index >=0){
-			nameIndexes.add(index);
-			index = cleanedMessageContent.indexOf(keyword, index+keyword.length());
-		}
-	}
-	
-	// get all the names mentioned after '@'; 
-	for (int i = 0; i < nameIndexes.size(); i++) {
-	    int firstLetter = nameIndexes.get(i) + 1;
-	    String name = cleanedMessageContent.substring(firstLetter);
-	    int endIndex = name.indexOf(' ');
-	    int currIndex = 0;
-	    while (Character.isDigit(name.charAt(currIndex)) || Character.isLetter(name.charAt(currIndex))) {
-	    		currIndex++;
-	    	 	if (currIndex >= name.length()) break;	
-	    }
-	    endIndex = currIndex; 
-	    
-	    name = name.substring(0, endIndex);
-	    if (userStore.getUser(name) != null) {
-	    	cleanedMessageContent = cleanedMessageContent.substring(0, firstLetter-1) 
-	    							+ "<b>@" + name + "</b>" 
-	    							+ cleanedMessageContent.substring(firstLetter+name.length());
-	    	if (i+1 < nameIndexes.size()) {
-	    		nameIndexes.set(i+1,nameIndexes.get(i+1) + 7);
-	    	}
-	    }
-	    mentions.add(name);
-	}
-	
-	
-    Message message =
-            new Message(
-                UUID.randomUUID(),
-                conversation.getId(),
-                user.getId(),
-                cleanedMessageContent,
-                Instant.now());
 
-        messageStore.addMessage(message);
+  	int index = cleanedMessageContent.indexOf(keyword);
+  	if (cleanedMessageContent.length() > 1) {
+  		while (index >=0){
+  			nameIndexes.add(index);
+  			index = cleanedMessageContent.indexOf(keyword, index+keyword.length());
+  		}
+  	}
+
+  	// get all the names mentioned after '@';
+  	for (int i = 0; i < nameIndexes.size(); i++) {
+  	    int firstLetter = nameIndexes.get(i) + 1;
+  	    String name = cleanedMessageContent.substring(firstLetter);
+  	    int endIndex = name.indexOf(' ');
+  	    int currIndex = 0;
+  	    while (Character.isDigit(name.charAt(currIndex)) || Character.isLetter(name.charAt(currIndex))) {
+  	    		currIndex++;
+  	    	 	if (currIndex >= name.length()) break;
+  	    }
+  	    endIndex = currIndex;
+
+  	    name = name.substring(0, endIndex);
+  	    if (userStore.getUser(name) != null) {
+  	    	cleanedMessageContent = cleanedMessageContent.substring(0, firstLetter-1)
+  	    							+ "<b>@" + name + "</b>"
+  	    							+ cleanedMessageContent.substring(firstLetter+name.length());
+  	    	if (i+1 < nameIndexes.size()) {
+  	    		nameIndexes.set(i+1,nameIndexes.get(i+1) + 7);
+  	    	}
+  	    }
+  	    mentions.add(name);
+  	 }
+
+      UUID messageId = UUID.randomUUID();
+      UUID groupId = messageId;
+      if (!groupID.equals("")) {  // if "reply" was clicked
+      	groupId = UUID.fromString(groupID);
+      	//System.out.println("MESSAGE: "+ cleanedMessageContent);
+      	cleanedMessageContent = "\t" + cleanedMessageContent;
+      	//System.out.println("MESSAGE2: "+ cleanedMessageContent);
+      }
+
+
+      Message message =
+              new Message(
+                  UUID.randomUUID(),
+                  conversation.getId(),
+                  user.getId(),
+                  cleanedMessageContent,
+                  Instant.now(),
+                  groupId);
+
+      messageStore.addMessage(message);
 
     	for (String usernameMentioned : mentions) {
     	    if (userStore.isUserRegistered(usernameMentioned)) {

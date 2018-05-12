@@ -34,8 +34,8 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
-public class UsersServletTest { // tests added by Lina (Project 2) 
-	
+public class UsersServletTest { // tests added by Lina (Project 2)
+
   private UsersServlet usersServlet;
   private HttpServletRequest mockRequest;
   private HttpSession mockSession;
@@ -81,7 +81,9 @@ public class UsersServletTest { // tests added by Lina (Project 2)
             UUID.randomUUID(),
             fakeUserId,
             "test message",
-            Instant.now()));
+						Instant.now(),
+            UUID.randomUUID()));
+
     Mockito.when(mockMessageStore.getMessagesFromAuthor(fakeUserId))
         .thenReturn(fakeMessageList);
 
@@ -109,7 +111,7 @@ public class UsersServletTest { // tests added by Lina (Project 2)
     Mockito.when(mockSession.getAttribute("user")).thenReturn("test_user");
 
     User fakeUser = new User(UUID.randomUUID(), "test_user", "test_pw", Instant.now());
-    
+
     Mockito.when(mockUserStore.getUser("test_user")).thenReturn(fakeUser);
 
     Mockito.when(mockRequest.getParameter("profile")).thenReturn("Test profile.");
