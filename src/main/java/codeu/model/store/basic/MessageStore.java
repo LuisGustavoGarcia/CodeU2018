@@ -31,7 +31,7 @@ public class MessageStore {
 
   /** Singleton instance of MessageStore. */
   private static MessageStore instance;
-  public HashMap <UUID, List<Message>> groupIDtoMessages = new HashMap<>(); 
+  public HashMap <UUID, List<Message>> groupIDtoMessages = new HashMap<>();
 
   /**
    * Returns the singleton instance of MessageStore that should be shared between all servlet
@@ -100,26 +100,26 @@ public class MessageStore {
       if (message.getConversationId().equals(conversationId)) {
         messagesInConversation.add(message);
       }
-    } 
-
-    //creating a HashMap for each message to have their related group IDs 
-    groupIDtoMessages = new HashMap<>(); 
-    for(Message message:messages) { 
-    	if (groupIDtoMessages.containsKey(message.getGroupID())) { 
-    		List<Message> messList = groupIDtoMessages.get(message.getGroupID());
-    		messList.add(message); 
-    		groupIDtoMessages.put(message.getGroupID(), messList); 
-    	} else { 
-    		ArrayList<Message> messList2 = new ArrayList<Message>(); 
-    		messList2.add(message); 
-    		groupIDtoMessages.put(message.getGroupID(), messList2); 
-    	} 
     }
 
-    messagesInConversation.sort(new GroupIdComparator()); 
-    return messagesInConversation; 
+    //creating a HashMap for each message to have their related group IDs
+    groupIDtoMessages = new HashMap<>();
+    for(Message message:messages) {
+    	if (groupIDtoMessages.containsKey(message.getGroupID())) {
+    		List<Message> messList = groupIDtoMessages.get(message.getGroupID());
+    		messList.add(message);
+    		groupIDtoMessages.put(message.getGroupID(), messList);
+    	} else {
+    		ArrayList<Message> messList2 = new ArrayList<Message>();
+    		messList2.add(message);
+    		groupIDtoMessages.put(message.getGroupID(), messList2);
+    	}
+    }
+
+    messagesInConversation.sort(new GroupIdComparator());
+    return messagesInConversation;
   }
-  
+
   /** Access the current set of Messages within the given Conversation. */
   public List<Message> getMessagesFromAuthor(UUID authorId) {
 
@@ -136,20 +136,20 @@ public class MessageStore {
 
   /** Sets the List of Messages stored by this MessageStore. */
   public void setMessages(List<Message> messages) {
-    this.messages = messages; 
-  } 
-  
+    this.messages = messages;
+  }
+
   class GroupIdComparator implements Comparator<Message> {
-	    @Override 
-	    public int compare(Message a, Message b) { 
-	    	if(a.getGroupID().equals(b.getGroupID())) { 
-	    		return a.getCreationTime().compareTo(b.getCreationTime()); 
-	    	} else { 
-	    		Message firstMessageA = groupIDtoMessages.get(a.getGroupID()).get(0); 
-	    		Message firstMessageB = groupIDtoMessages.get(b.getGroupID()).get(0); 
-	    		return firstMessageA.getCreationTime().compareTo(firstMessageB.getCreationTime()); 
-	    	} 
+	    @Override
+	    public int compare(Message a, Message b) {
+	    	if(a.getGroupID().equals(b.getGroupID())) {
+	    		return a.getCreationTime().compareTo(b.getCreationTime());
+	    	} else {
+	    		Message firstMessageA = groupIDtoMessages.get(a.getGroupID()).get(0);
+	    		Message firstMessageB = groupIDtoMessages.get(b.getGroupID()).get(0);
+	    		return firstMessageA.getCreationTime().compareTo(firstMessageB.getCreationTime());
+	    	}
 	    }
-  } 
-  
+  }
+
 }

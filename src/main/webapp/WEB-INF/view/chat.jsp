@@ -1,12 +1,9 @@
 <%--
   Copyright 2017 Google Inc.
-
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
-
      http://www.apache.org/licenses/LICENSE-2.0
-
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -64,25 +61,25 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
     <h1><%= conversation.getTitle() %>
       <a href="" style="float: right">&#8635;</a></h1>
 
-    <hr/> 
+    <hr/>
 
-	
+
     <div id="chat">
       <ul>
     <%
-      for (int i = 0; i < messages.size(); i++){ 
-        Message message = messages.get(i); 
+      for (int i = 0; i < messages.size(); i++){
+        Message message = messages.get(i);
         String author = UserStore.getInstance()
           .getUser(message.getAuthorId()).getName();
-    %> 
-      <li style="list-style-type:none"><strong><a href="/users/<%= author %>"><%= author %></a>:</strong> <%= message.getContent() %></li> 
-        <% 
-        if (i == (messages.size()-1) || !(messages.get(i+1).getGroupID().equals(messages.get(i).getGroupID()))) { 
-        %> 
-        <button id="respondButton" type="submit" onclick="onReplyClick('<%= message.getGroupID()%>')">Reply to Message</button>  
-    <% 
-        } 
-      } 
+    %>
+      <li style="list-style-type:none"><strong><a href="/users/<%= author %>"><%= author %></a>:</strong> <%= message.getContent() %></li>
+        <%
+        if (i == (messages.size()-1) || !(messages.get(i+1).getGroupID().equals(messages.get(i).getGroupID()))) {
+        %>
+        <button id="respondButton" type="submit" onclick="onReplyClick('<%= message.getGroupID()%>')">Reply to Message</button>
+    <%
+        }
+      }
     %>
       </ul>
     </div>
@@ -99,16 +96,16 @@ List<Message> messages = (List<Message>) request.getAttribute("messages");
 
     <form action="/chat/<%= conversation.getTitle() %>" method="POST">
       <div>
-        <p id="pInput" class="editor" title="Enter your message."></p> 
-        <button id="submitButton" type="submit" onclick="getMessage()">Send</button> 
+        <p id="pInput" class="editor" title="Enter your message."></p>
+        <button id="submitButton" type="submit" onclick="getMessage()">Send</button>
       </div>
       <br/>
       <input type="hidden" value="message" name="message" id="hiddenInput" />
-      <input type="hidden" value="" name="replyID" id="hiddenReply" /> 
-    </form>  
+      <input type="hidden" value="" name="replyID" id="hiddenReply" />
+    </form>
 
     <% } else { %>
-      <p><a href="/login">Login</a> to send a message.</p> 
+      <p><a href="/login">Login</a> to send a message.</p>
     <% } %>
 
     <hr/>
