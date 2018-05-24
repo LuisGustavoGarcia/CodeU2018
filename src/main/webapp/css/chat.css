@@ -6,6 +6,7 @@
 .editButtons {
   background-color: white;
   border: none;
+  z-index: 2;
 }
 
 .icon {
@@ -20,6 +21,7 @@
   -webkit-box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
   -moz-box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
   box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
+  z-index: 1;
 }
 
 #pInput {
@@ -46,8 +48,8 @@
 #chat {
   background-color: white;
   height: 80vh;
-  overflow-y: scroll
-  -webkit-box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
-  -moz-box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
-  box-shadow: 7px 7px 24px 0px rgba(0,0,0,0.29);
+  overflow-y: scroll;
+  -webkit-box-shadow: 7px 0px 24px 0px rgba(0,0,0,0.29);
+  -moz-box-shadow: 7px 0px 24px 0px rgba(0,0,0,0.29);
+  box-shadow: 7px 0px 24px 0px rgba(0,0,0,0.29);
 }
