@@ -20,15 +20,13 @@
   <title>Indie Ozone's Chat App</title>
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/index.css">
-  <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
-  <script type="text/javascript" src="../js/jquery.transit.min.js"></script>
 </head>
 <body class="body" style="vertical-align: middle">
   <div>
     <div id="image_area">
       <img id="earth" src="../assets/Earth.png"/>
       <img id="clouds" src="../assets/Clouds.png"/>
-      <img id="satellite" src="../assets/Satellite.png"/>
+      <img class="floating" id="satellite" src="../assets/Satellite.png"/>
     </div>
 
     <div id="login_area">
@@ -63,8 +61,5 @@
   </div>
 
   <script src="../../../js/index.js"></script>
-  <script type="text/javascript">
-    // TODO: Make clouds rotate, and satellite bounce around a bit.
-  </script>
 </body>
 </html>
